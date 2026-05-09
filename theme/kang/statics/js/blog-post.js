@@ -2,7 +2,43 @@
 	var input = document.getElementById('post-search-input');
 	var results = document.getElementById('post-search-results');
 	var note = document.getElementById('post-search-note');
-	var items = results ? Array.prototype.slice.call(results.querySelectorAll('li[data-post-search]')) : [];
+	var posts = window.FJK_POSTS || [];
+	var items = [];
+
+	function getSearchText(post) {
+		return [
+			post.title,
+			post.excerpt,
+			post.date,
+			(post.tags || []).join(' '),
+			post.keywords
+		].join(' ').toLowerCase();
+	}
+
+	function createSearchItem(post) {
+		var item = document.createElement('li');
+		var anchor = document.createElement('a');
+
+		item.dataset.postSearch = getSearchText(post);
+		anchor.href = post.url;
+		anchor.textContent = post.title;
+		item.appendChild(anchor);
+
+		return item;
+	}
+
+	function renderSearchItems() {
+		if (!results) return;
+
+		if (posts.length) {
+			results.innerHTML = '';
+			posts.forEach(function (post) {
+				results.appendChild(createSearchItem(post));
+			});
+		}
+
+		items = Array.prototype.slice.call(results.querySelectorAll('li[data-post-search]'));
+	}
 
 	function updateSearch(query) {
 		var normalized = query.trim().toLowerCase();
@@ -26,6 +62,7 @@
 
 	if (!input || !results) return;
 
+	renderSearchItems();
 	updateSearch('');
 	input.addEventListener('input', function () {
 		updateSearch(input.value);
