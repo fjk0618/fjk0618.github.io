@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MacOS数据库GUI工具-DBX部署</title>
+    <meta name="description" content="记录 macOS 上通过 Homebrew cask 安装、启动、升级和卸载 DBX 数据库 GUI 工具的流程，并补充首次连接和安全使用建议。">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <a class="brand" href="/">
+          <span class="brand-mark">❯</span>
+          <span>fjk0618 notes</span>
+        </a>
+        <nav class="nav" aria-label="站点导航">
+          <a href="/">首页</a>
+          <a href="https://github.com/fjk0618/fjk0618.github.io">仓库</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow">🗄️ database gui</div>
+        <h1>MacOS数据库GUI工具-DBX部署</h1>
+        <p class="lead">DBX 是一个轻量的开源数据库管理工具，桌面端基于 Tauri，不内嵌 Chromium。它适合把日常开发里分散的 MySQL、PostgreSQL、SQLite、Redis、MongoDB、DuckDB、ClickHouse 等连接收敛到一个 GUI 里。</p>
+        <div class="meta">
+          <span class="pill">🗓️ 发布时间：2026-05-09</span>
+          <span class="pill">🍺 Homebrew cask</span>
+          <span class="pill">🗄️ DBX 0.5.0</span>
+          <span class="pill">🍎 macOS 11+</span>
+        </div>
+        <div class="emoji-strip" aria-label="文章重点标签">
+          <span>⚡ 轻量桌面端</span>
+          <span>🔍 SQL 编辑器</span>
+          <span>🔐 连接安全</span>
+          <span>🧰 多数据库管理</span>
+        </div>
+      </section>
+
+      <div class="content">
+        <main>
+          <article>
+            <p>这篇只记录 macOS 桌面端的部署方式，安装主线走 Homebrew。DBX 也提供 Docker 自托管版本和 MCP Server，但如果目标是本机数据库 GUI 工具，先把桌面端安装、启动、连接和升级路径跑通就够了。</p>
+
+            <div class="info-grid">
+              <div class="info-box">
+                <strong><span class="emoji" aria-hidden="true">🔗</span>原仓库</strong>
+                <p><a href="https://github.com/t8y2/dbx">github.com/t8y2/dbx</a></p>
+              </div>
+              <div class="info-box">
+                <strong><span class="emoji" aria-hidden="true">⭐</span>GitHub Stars</strong>
+                <p><a href="https://github.com/t8y2/dbx/stargazers"><span id="dbx-stars">自动获取中...</span></a></p>
+              </div>
+            </div>
+
+            <h2 id="why"><span class="emoji" aria-hidden="true">🧭</span>为什么用 DBX</h2>
+            <p>数据库客户端最容易变成“每种库装一个工具”：MySQL 一个、Redis 一个、MongoDB 一个，临时看 SQLite 或 DuckDB 又换另一个。DBX 的价值在于把常见数据库连接、结构浏览、查询编辑、数据表格、导入导出和简单分析放进同一个应用里。</p>
+            <p>它更像一个开发侧的工作台：快速打开连接，查一段数据，跑一条 SQL，看表结构、索引、外键和执行计划。生产环境变更仍然应该走审核、迁移和回滚流程，不要把 GUI 当成变更管控。</p>
+
+            <h2 id="prepare"><span class="emoji" aria-hidden="true">🧱</span>准备条件</h2>
+            <ul class="emoji-list">
+              <li><span class="emoji" aria-hidden="true">🍎</span>macOS 版本不低于 Big Sur，也就是 <code>macOS 11</code>。</li>
+              <li><span class="emoji" aria-hidden="true">🍺</span>本机已经安装 Homebrew，Apple Silicon 默认路径通常是 <code>/opt/homebrew</code>。</li>
+              <li><span class="emoji" aria-hidden="true">🌐</span>安装时需要能访问 GitHub release，因为 cask 会从 DBX 的 release 下载 dmg。</li>
+            </ul>
+
+            <p>当前 Homebrew cask 信息显示 DBX 版本是 <code>0.5.0</code>，cask 来源是 <code>t8y2/homebrew-tap</code>：</p>
+<pre><code class="language-bash">brew info --cask t8y2/tap/dbx</code></pre>
+
+            <h2 id="install"><span class="emoji" aria-hidden="true">🍺</span>用 Homebrew 安装</h2>
+            <p>安装命令保持一条就够了。Homebrew 会自动使用 DBX tap 里的 cask，并把 <code>DBX.app</code> 放到应用目录。</p>
+<pre><code class="language-bash">brew install --cask t8y2/tap/dbx</code></pre>
+
+            <p>安装完成后直接启动：</p>
+<pre><code class="language-bash">open -a DBX</code></pre>
+
+            <p class="note">🔐 如果第一次打开时被 macOS Gatekeeper 拦截，先确认你安装的是官方仓库 release 对应的 Homebrew cask。确认来源后，可以在 Finder 里右键打开一次；仍然被拦截时，再考虑清理隔离属性：<code>xattr -dr com.apple.quarantine /Applications/DBX.app</code>。</p>
+
+            <h2 id="first-run"><span class="emoji" aria-hidden="true">🚀</span>首次启动后做什么</h2>
+            <ol class="emoji-steps">
+              <li>🧩 先建一个本地开发库连接，例如本机 MySQL、PostgreSQL 或 SQLite 文件。</li>
+              <li>🎨 给不同环境设置容易识别的名称和颜色，避免把测试库、预发库和生产库混在一起。</li>
+              <li>🔐 连接生产或共享环境时，优先使用只读账号；需要内网访问时，优先走 SSH tunnel。</li>
+              <li>🧪 先执行只读查询，确认库名、schema、表名和账号权限都符合预期。</li>
+            </ol>
+
+            <p>DBX 内置查询编辑器、结构浏览、数据表格和导出能力。日常最常用的入口是：左侧选连接，中间看 schema，打开表或 SQL 编辑器，用 <code>Cmd + Enter</code> 执行当前 SQL。</p>
+
+            <h2 id="workflow"><span class="emoji" aria-hidden="true">🔍</span>常用工作流</h2>
+            <ul class="emoji-list">
+              <li><span class="emoji" aria-hidden="true">📝</span>写 SQL：编辑器支持语法高亮、表字段补全、选中 SQL 执行和格式化。</li>
+              <li><span class="emoji" aria-hidden="true">📊</span>看数据：表格支持分页、排序、搜索、列宽调整和导出 CSV、JSON、Markdown。</li>
+              <li><span class="emoji" aria-hidden="true">🧬</span>看结构：可以浏览库、schema、表、字段、索引、外键和触发器。</li>
+              <li><span class="emoji" aria-hidden="true">🧭</span>排查查询：需要时看 explain plan、ER 关系图或 schema diff。</li>
+              <li><span class="emoji" aria-hidden="true">📦</span>临时文件：拖入 Parquet、CSV、JSON 可以用 DuckDB 做预览。</li>
+            </ul>
+
+            <p>如果你只是找一个“能连库、能查数据、别太重”的客户端，先用这些基础能力就够了。AI SQL Assistant、MCP Server、跨库迁移这类功能可以等稳定使用后再打开。</p>
+
+            <h2 id="upgrade"><span class="emoji" aria-hidden="true">🔁</span>升级、卸载和清理</h2>
+            <p>DBX 迭代比较快，Homebrew 这条路径的优势是升级和清理都很清楚。想看当前本机版本和 cask 最新版本：</p>
+<pre><code class="language-bash">brew info --cask t8y2/tap/dbx</code></pre>
+
+            <p>升级到 cask 当前版本：</p>
+<pre><code class="language-bash">brew update
+brew upgrade --cask t8y2/tap/dbx</code></pre>
+
+            <p>只卸载应用，不清配置：</p>
+<pre><code class="language-bash">brew uninstall --cask t8y2/tap/dbx</code></pre>
+
+            <p>如果需要连配置、缓存和日志一起清理，可以使用 cask 的 zap 规则：</p>
+<pre><code class="language-bash">brew uninstall --cask --zap t8y2/tap/dbx</code></pre>
+
+            <p class="note">⚠️ zap 会清理 <code>~/Library/Application Support/com.dbx.app</code>、缓存、偏好设置和日志。里面可能有本地连接配置，执行前先确认不需要保留。</p>
+
+            <h2 id="verify"><span class="emoji" aria-hidden="true">✅</span>验证</h2>
+            <p>部署完成后，我会按下面几项确认：</p>
+<pre><code class="language-bash">brew info --cask t8y2/tap/dbx
+ls -ld /Applications/DBX.app
+open -a DBX</code></pre>
+
+            <ol class="emoji-steps">
+              <li>🍺 <code>brew info</code> 能看到 <code>DBX.app</code> artifact 和版本信息。</li>
+              <li>📦 <code>/Applications/DBX.app</code> 存在。</li>
+              <li>🚀 应用可以正常打开。</li>
+              <li>🧪 新建一个开发库连接后，可以展开 schema 并执行一条只读 SQL。</li>
+            </ol>
+
+            <h2 id="notes"><span class="emoji" aria-hidden="true">🧯</span>几个使用建议</h2>
+            <p>第一，连接生产库时尽量使用只读账号，把颜色和名称设置得足够醒目。第二，GUI 适合排查、浏览和少量操作，不适合替代迁移脚本和审核流程。第三，连接配置涉及账号、主机和隧道信息，导出配置前确认是否包含敏感内容。</p>
+            <p>第四，Homebrew cask 版本可能比你本机已安装版本新。看到 <code>brew info</code> 里 “Installed” 和顶部版本不一致时，直接执行 <code>brew upgrade --cask t8y2/tap/dbx</code>。</p>
+          </article>
+        </main>
+
+        <aside class="toc" aria-label="文章目录">
+          <strong>📚 目录</strong>
+          <a href="#why"><span class="emoji" aria-hidden="true">🧭</span>为什么用 DBX</a>
+          <a href="#prepare"><span class="emoji" aria-hidden="true">🧱</span>准备条件</a>
+          <a href="#install"><span class="emoji" aria-hidden="true">🍺</span>Homebrew 安装</a>
+          <a href="#first-run"><span class="emoji" aria-hidden="true">🚀</span>首次启动</a>
+          <a href="#workflow"><span class="emoji" aria-hidden="true">🔍</span>常用工作流</a>
+          <a href="#upgrade"><span class="emoji" aria-hidden="true">🔁</span>升级卸载</a>
+          <a href="#verify"><span class="emoji" aria-hidden="true">✅</span>验证</a>
+          <a href="#notes"><span class="emoji" aria-hidden="true">🧯</span>使用建议</a>
+        </aside>
+      </div>
+
+      <footer class="footer">
+        📚 原始资料参考 DBX 官方 README 和 Homebrew cask；本文按 macOS 桌面端部署流程重新整理。
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var target = document.getElementById('dbx-stars');
+        if (!target) return;
+
+        fetch('https://api.github.com/repos/t8y2/dbx', {
+          headers: { 'Accept': 'application/vnd.github+json' }
+        })
+          .then(function (response) {
+            if (!response.ok) throw new Error('GitHub API unavailable');
+            return response.json();
+          })
+          .then(function (repo) {
+            var count = new Intl.NumberFormat('en-US').format(repo.stargazers_count);
+            target.textContent = count + ' stars';
+          })
+          .catch(function () {
+            target.textContent = '打开仓库查看最新 Stars';
+          });
+      }());
+    </script>
+  </body>
+</html>
