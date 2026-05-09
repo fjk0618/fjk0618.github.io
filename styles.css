@@ -99,6 +99,7 @@ a:hover {
 .hero {
   display: grid;
   gap: 26px;
+  min-width: 0;
   padding: 52px 0 36px;
   border-bottom: 1px solid rgba(205, 214, 244, 0.12);
 }
@@ -123,6 +124,7 @@ h1 {
   color: var(--rosewater);
   font-size: clamp(2.3rem, 6vw, 5.7rem);
   letter-spacing: 0;
+  overflow-wrap: anywhere;
 }
 
 .lead {
@@ -133,6 +135,8 @@ h1 {
 
 .terminal-strip {
   display: grid;
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   border: 1px solid rgba(205, 214, 244, 0.14);
@@ -144,7 +148,7 @@ h1 {
 
 .terminal-line {
   display: flex;
-  width: max-content;
+  min-width: max-content;
   color: var(--crust);
   font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: clamp(0.72rem, 2.6vw, 0.96rem);
