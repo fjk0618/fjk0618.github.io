@@ -20,18 +20,23 @@
         </nav>
       </header>
 
-      <section class="hero">
-        <div class="eyebrow">macOS terminal setup</div>
-        <h1>Kaku + fish + Starship 的 Catppuccin Powerline 工作台</h1>
-        <p class="lead">一篇从当前本机配置整理出来的安装和配置笔记，覆盖 Homebrew 安装、Kaku shell 集成、fish 启动、Nerd Font 字体和 Starship Powerline 主题。</p>
-        <div class="terminal-strip" aria-label="Starship Powerline prompt preview">
-          <div class="terminal-line">
-            <span class="seg seg-os">󰀵 fjk0618</span><span class="seg sep" style="background: var(--peach); color: var(--red);"></span><span class="seg seg-dir">~/Developer/blog</span><span class="seg sep" style="background: var(--yellow); color: var(--peach);"></span><span class="seg seg-git"> main</span><span class="seg sep" style="background: var(--green); color: var(--yellow);"></span><span class="seg seg-lang"> go1.25</span><span class="seg sep" style="background: var(--lavender); color: var(--green);"></span><span class="seg seg-time"> 13:16</span><span class="seg sep" style="color: var(--lavender);"></span>
-          </div>
+      <section class="home-hero">
+        <div>
+          <div class="eyebrow">notes / terminal</div>
+          <h1 class="home-title">终端配置笔记</h1>
+          <p class="lead">记录 macOS 开发环境、终端工具链和日常工程配置。文章尽量从真实本机配置出发，保留可复现命令和关键取舍。</p>
+        </div>
+        <div class="stack-panel" aria-label="当前笔记主题">
+          <span>Kaku</span>
+          <span>fish</span>
+          <span>Starship</span>
+          <span>Nerd Font</span>
+          <span>Catppuccin</span>
         </div>
       </section>
 
       <main>
+        <div class="section-heading">最新文章</div>
         <div class="post-list">
           <a class="post-card" href="/posts/mac-kaku-fish-starship-nerd-catppuccin-powerline/">
             <span class="meta"><span class="pill">2026-05-09</span><span class="pill">macOS</span><span class="pill">terminal</span></span>
@@ -42,7 +47,7 @@
       </main>
 
       <footer class="footer">
-        GitHub Pages static site. Source repository: <a href="https://github.com/fjk0618/fjk0618.github.io">fjk0618/fjk0618.github.io</a>.
+        源码仓库：<a href="https://github.com/fjk0618/fjk0618.github.io">fjk0618/fjk0618.github.io</a>
       </footer>
     </div>
   </body>

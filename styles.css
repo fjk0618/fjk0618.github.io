@@ -100,9 +100,19 @@ a:hover {
 
 .hero {
   display: grid;
-  gap: 26px;
+  gap: 22px;
   min-width: 0;
-  padding: 52px 0 36px;
+  padding: 34px 0 30px;
+  border-bottom: 1px solid rgba(205, 214, 244, 0.12);
+}
+
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  align-items: end;
+  gap: 36px;
+  min-width: 0;
+  padding: 42px 0 30px;
   border-bottom: 1px solid rgba(205, 214, 244, 0.12);
 }
 
@@ -122,11 +132,15 @@ h3 {
 }
 
 h1 {
-  max-width: 900px;
+  max-width: 820px;
   color: var(--rosewater);
-  font-size: clamp(2.3rem, 6vw, 5.7rem);
+  font-size: clamp(1.95rem, 3.8vw, 3.4rem);
   letter-spacing: 0;
   overflow-wrap: anywhere;
+}
+
+.home-title {
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
 }
 
 .lead {
@@ -158,6 +172,28 @@ h1 {
   font-size: clamp(0.72rem, 2.6vw, 0.96rem);
   line-height: 2.3;
   white-space: nowrap;
+}
+
+.stack-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid rgba(205, 214, 244, 0.12);
+  border-radius: 8px;
+  background: rgba(49, 50, 68, 0.42);
+}
+
+.stack-panel span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid rgba(205, 214, 244, 0.14);
+  border-radius: 999px;
+  color: var(--text);
+  background: rgba(17, 17, 27, 0.38);
+  font-size: 0.9rem;
 }
 
 .seg {
@@ -300,7 +336,16 @@ pre code {
 .post-list {
   display: grid;
   gap: 18px;
-  margin-top: 30px;
+  margin-top: 14px;
+}
+
+.section-heading {
+  margin-top: 34px;
+  color: var(--peach);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .post-card {
@@ -338,7 +383,17 @@ pre code {
   }
 
   h1 {
-    font-size: clamp(2rem, 9vw, 2.45rem);
+    font-size: clamp(1.92rem, 8vw, 2.35rem);
+  }
+
+  .home-hero {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-top: 28px;
+  }
+
+  .home-title {
+    font-size: clamp(2.05rem, 10vw, 2.7rem);
   }
 
   .topbar {
