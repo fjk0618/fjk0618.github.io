@@ -1,47 +1,127 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>mac下粘贴板工具-Maccy安装使用</title>
-    <meta name="description" content="介绍 macOS 开源剪贴板工具 Maccy 的作用、Homebrew 安装方式和自动粘贴体验优化。">
-    <link rel="stylesheet" href="/styles.css">
-  </head>
-  <body>
-    <div class="site">
-      <header class="topbar">
-        <a class="brand" href="/">
-          <span class="brand-mark">❯</span>
-          <span>fjk0618 notes</span>
-        </a>
-        <nav class="nav" aria-label="站点导航">
-          <a href="/">首页</a>
-          <a href="https://github.com/fjk0618/fjk0618.github.io">仓库</a>
-        </nav>
-      </header>
 
-      <section class="hero">
-        <div class="eyebrow">📋 macOS clipboard</div>
-        <h1>mac下粘贴板工具-Maccy安装使用</h1>
-        <p class="lead">Maccy 是一个轻量、开源、键盘优先的 macOS 剪贴板管理器。它解决的不是“复制”本身，而是复制之后经常丢、经常找、经常重复复制的问题。</p>
-        <div class="meta">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>mac下粘贴板工具-Maccy安装使用</title>
+		<meta name="description" content="介绍 macOS 开源剪贴板工具 Maccy 的作用、Homebrew 安装方式和自动粘贴体验优化。">
+		<link rel="stylesheet" type="text/css" href="/theme/kang/statics/css/index.css" media="all">
+		<link rel="stylesheet" type="text/css" href="/theme/kang/statics/css/detail.css">
+		<link rel="stylesheet" type="text/css" href="/theme/kang/statics/css/blog-post.css">
+	</head>
+
+	<body class="home blog custom-background round-avatars" itemscope itemtype="http://schema.org/Organization">
+		<div class="Yarn_Background" style="background-image: url(/theme/kang/statics/images/47fb3c_.jpg);"></div>
+
+		<form class="js-search search-form search-form--modal" method="get" action="/" role="search" aria-label="文章搜索">
+			<div class="search-form__inner">
+				<div>
+					<div id="search-container" class="ajax_search">
+						<div class="filter_container">
+							<input type="search" value="" autocomplete="off" placeholder="搜索文章" name="s" id="post-search-input" aria-label="搜索文章">
+							<ul id="post-search-results" class="search_filtered">
+							<li data-post-search="macos 数据库 gui 工具 dbx 部署 homebrew cask database mysql postgresql sqlite redis mongodb duckdb clickhouse"><a href="/posts/macos-database-gui-dbx-deploy/">MacOS数据库GUI工具-DBX部署</a></li>
+							<li data-post-search="macos 粘贴板 剪贴板 工具 maccy 安装 使用 homebrew clipboard 自动粘贴"><a href="/posts/mac-maccy-clipboard-manager/">mac下粘贴板工具-Maccy安装使用</a></li>
+							<li data-post-search="macos kaku fish starship nerd font catppuccin powerline terminal homebrew 终端 配置"><a href="/posts/mac-kaku-fish-starship-nerd-catppuccin-powerline/">macOS 下 Kaku + fish + Starship + Nerd Font + Catppuccin Powerline 配置</a></li>
+							</ul>
+							<p id="post-search-note" class="post-search-note">输入关键词后，选择要跳转的文章。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="navi" data-aos="fade-down">
+			<div class="bt-nav" aria-label="切换导航">
+				<div class="line line1"></div>
+				<div class="line line2"></div>
+				<div class="line line3"></div>
+			</div>
+			<div class="navbar animated fadeInRight">
+				<div class="inner">
+					<nav id="site-navigation" class="main-navigation" aria-label="站点导航">
+						<div id="main-menu" class="main-menu-container">
+							<div class="menu-menu-container">
+								<ul id="primary-menu" class="menu">
+									<li class="menu-item"><a href="/">首页</a></li>
+									<li class="menu-item current-menu-item current_page_item"><a href="#article">正文</a></li>
+									<li class="menu-item"><a href="/kangBlog/">模板预览</a></li>
+									<li class="menu-item"><a href="https://github.com/fjk0618">GitHub</a></li>
+									<li class="menu-item"><a href="https://262688.xyz">旧站</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+		<button class="hebin js-toggle-search" data-aos="fade-down" type="button" aria-label="打开文章搜索">
+			<i class="iconfont" aria-hidden="true">&#xe60e;</i>
+		</button>
+
+		<header id="masthead" class="overlay animated from-bottom" itemprop="brand">
+			<div class="site-branding text-center">
+				<a href="/" aria-label="返回首页">
+					<figure>
+						<img class="custom-logo avatar" src="/theme/kang/statics/images/omikron.png" alt="fjk0618 notes">
+					</figure>
+				</a>
+				<h1 class="site-title">fjk0618 notes</h1>
+				<h3 class="blog-description"><span>macOS 工具笔记 · Homebrew · GUI · CLI · AI Coding</span></h3>
+			</div>
+			<div class="decor-part">
+				<div id="particles-js"></div>
+			</div>
+			<div class="animation-header">
+				<div class="decor-wrapper">
+					<svg id="header-decor" class="decor bottom" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+						<path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+						<path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+						<path class="medium left" d="M0 100 L50 50 L0 33.3" fill="rgba(255,255,255, .3)"></path>
+						<path class="medium right" d="M100 100 L50 50 L100 33.3" fill="rgba(255,255,255, .3)"></path>
+						<path class="small left" d="M0 100 L50 50 L0 66.6" fill="rgba(255,255,255, .5)"></path>
+						<path class="small right" d="M100 100 L50 50 L100 66.6" fill="rgba(255,255,255, .5)"></path>
+						<path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="rgba(255,255,255, 1)"></path>
+						<path d="M48 52 L50 49 L52 52 L48 52" fill="rgba(255,255,255, 1)"></path>
+					</svg>
+				</div>
+			</div>
+		</header>
+
+		<div id="main" class="content">
+			<div class="container">
+				<article id="article" class="js-gallery post type-post status-publish format-standard hentry">
+					<section class="post_content" data-aos="fade-up">
+						<header class="post_header article-header">
+<div class="article-kicker">📋 macOS clipboard</div>
+        <h1 class="post_title">mac下粘贴板工具-Maccy安装使用</h1>
+        <p class="article-lead">Maccy 是一个轻量、开源、键盘优先的 macOS 剪贴板管理器。它解决的不是“复制”本身，而是复制之后经常丢、经常找、经常重复复制的问题。</p>
+        <div class="article-meta">
           <span class="pill">🗓️ 发布时间：2026-05-09</span>
           <span class="pill">🍺 Homebrew</span>
           <span class="pill">📋 Maccy</span>
           <span class="pill">🔁 自动粘贴</span>
         </div>
-        <div class="emoji-strip" aria-label="文章重点标签">
+        <div class="article-tags" aria-label="文章重点标签">
           <span>⌨️ 键盘优先</span>
           <span>⚡ 快速检索</span>
           <span>🔍 可搜索历史</span>
           <span>🔒 隐私提醒</span>
         </div>
-      </section>
-
-      <div class="content">
-        <main>
-          <article>
-            <div class="info-grid">
+						</header>
+						<nav class="post-toc" aria-label="文章目录">
+<strong>📚 目录</strong>
+          <a href="#why"><span class="emoji" aria-hidden="true">🧩</span>为什么需要</a>
+          <a href="#install"><span class="emoji" aria-hidden="true">🍺</span>安装</a>
+          <a href="#workflow"><span class="emoji" aria-hidden="true">⌨️</span>基本使用</a>
+          <a href="#auto-paste"><span class="emoji" aria-hidden="true">⚡</span>自动粘贴</a>
+          <a href="#benefits"><span class="emoji" aria-hidden="true">🎯</span>适用场景</a>
+          <a href="#notes"><span class="emoji" aria-hidden="true">🔒</span>使用建议</a>
+						</nav>
+						<div class="post-body js-gallery">
+<div class="info-grid">
               <div class="info-box">
                 <strong><span class="emoji" aria-hidden="true">🔗</span>原仓库</strong>
                 <p><a href="https://github.com/p0deje/Maccy">github.com/p0deje/Maccy</a></p>
@@ -97,27 +177,71 @@ open -a Maccy</code></pre>
             <h2 id="notes"><span class="emoji" aria-hidden="true">🔒</span>几个使用建议</h2>
             <p>第一，剪贴板历史会涉及隐私，密码、token、密钥这类内容尽量交给密码管理器，不要依赖剪贴板长期保存。第二，Maccy 支持忽略复制事件和忽略特定 pasteboard 类型；如果你的工作流经常复制敏感内容，可以再去设置里收紧规则。</p>
             <p>第三，记住一个快捷键就够了：<code>Shift + Command + C</code>。把它当成“打开复制历史”的入口，其他操作等真的需要时再学。</p>
-          </article>
-        </main>
+						</div>
+						<div class="meta split split--responsive cf">
+							<div class="split__title">
+								<time datetime="2026-05-09">2026/05/09</time>
+								<span><a href="/">macOS</a><a href="/">Homebrew</a><a href="/">工具笔记</a></span>
+							</div>
+						</div>
+					</section>
+				</article>
+			</div>
+		</div>
 
-        <aside class="toc" aria-label="文章目录">
-          <strong>📚 目录</strong>
-          <a href="#why"><span class="emoji" aria-hidden="true">🧩</span>为什么需要</a>
-          <a href="#install"><span class="emoji" aria-hidden="true">🍺</span>安装</a>
-          <a href="#workflow"><span class="emoji" aria-hidden="true">⌨️</span>基本使用</a>
-          <a href="#auto-paste"><span class="emoji" aria-hidden="true">⚡</span>自动粘贴</a>
-          <a href="#benefits"><span class="emoji" aria-hidden="true">🎯</span>适用场景</a>
-          <a href="#notes"><span class="emoji" aria-hidden="true">🔒</span>使用建议</a>
-        </aside>
-      </div>
+		<div class="p-header">
+			<figure class="p-image" style="background-image: url(/theme/kang/statics/images/IMG_0150.jpg);"></figure>
+		</div>
 
-      <footer class="footer">
-        📚 原始资料参考 Maccy 官方 README；本文按日常使用流程重新整理。
-      </footer>
-    </div>
+		<div class="navpost-part">
+			<div id="NextPrevPosts">
+				<div class="prev" data-aos="slide-right" data-aos-delay="1.5s">
+					<div class="arrow"><i class="iconfont">&#xe625;</i></div>
+					<div class="preview">
+						<div class="pull-left featuredImg" style="background-image:url('/theme/kang/statics/images/no-image.png');"></div>
+						<a class="pull-left preview-content bold" href="/posts/macos-database-gui-dbx-deploy/"><span>MacOS数据库GUI工具-DBX部署</span></a>
+					</div>
+				</div>
+				<div class="next" data-aos="slide-left" data-aos-delay="1.5s">
+					<div class="arrow"><i class="iconfont">&#xe623;</i></div>
+					<div class="preview">
+						<div class="pull-right featuredImg" style="background-image:url('/theme/kang/statics/images/Dcras.png');"></div>
+						<a class="pull-right preview-content bold" href="/posts/mac-kaku-fish-starship-nerd-catppuccin-powerline/"><span>macOS 下 Kaku + fish + Starship 配置</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <script>
-      (function () {
+		<footer id="footer" class="overlay animated from-top">
+			<div class="decor-wrapper">
+				<svg id="footer-decor" class="decor top" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+					<path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+					<path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+					<path class="medium left" d="M0 0 L50 50 L0 66.6" fill="rgba(255,255,255, .3)"></path>
+					<path class="medium right" d="M100 0 L50 50 L100 66.6" fill="rgba(255,255,255, .3)"></path>
+					<path class="small left" d="M0 0 L50 50 L0 33.3" fill="rgba(255,255,255, .5)"></path>
+					<path class="small right" d="M100 0 L50 50 L100 33.3" fill="rgba(255,255,255, .5)"></path>
+					<path d="M0 0 L50 50 L100 0 L0 0" fill="rgba(255,255,255, 1)"></path>
+					<path d="M48 48 L50 51 L52 48 L48 48" fill="rgba(255,255,255, 1)"></path>
+				</svg>
+			</div>
+			<ul class="socialize" data-aos="zoom-in">
+				<li><a title="GitHub" class="socialicon" href="https://github.com/fjk0618"><i class="iconfont" aria-hidden="true">&#xe616;</i></a></li>
+				<li><a title="旧站" class="socialicon" href="https://262688.xyz"><i class="iconfont" aria-hidden="true">&#xe609;</i></a></li>
+			</ul>
+			<div class="cr">Copyright&copy;2026. Design adapted from <a href="/kangBlog/">kangBlog</a></div>
+			<p class="article-source">📚 原始资料参考 Maccy 官方 README；本文按日常使用流程重新整理。</p>
+		</footer>
+
+		<script type="text/javascript" src="/theme/kang/statics/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/plugins.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/script.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/particles.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/aos.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/prism.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/blog-post.js"></script>
+		<script>
+(function () {
         var target = document.getElementById('maccy-stars');
         if (!target) return;
 
@@ -136,6 +260,7 @@ open -a Maccy</code></pre>
             target.textContent = '打开仓库查看最新 Stars';
           });
       }());
-    </script>
-  </body>
+		</script>
+	</body>
+
 </html>

@@ -1,36 +1,110 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>macOS 下 Kaku + fish + Starship + Nerd Font + Catppuccin Powerline 配置</title>
-    <meta name="description" content="基于本机配置整理的 macOS 终端配置笔记：Kaku、fish、Starship、JetBrainsMono Nerd Font 与 Catppuccin Powerline prompt。">
-    <link rel="stylesheet" href="/styles.css">
-  </head>
-  <body>
-    <div class="site">
-      <header class="topbar">
-        <a class="brand" href="/">
-          <span class="brand-mark">❯</span>
-          <span>fjk0618 notes</span>
-        </a>
-        <nav class="nav" aria-label="站点导航">
-          <a href="/">首页</a>
-          <a href="https://github.com/fjk0618/fjk0618.github.io">仓库</a>
-        </nav>
-      </header>
 
-      <section class="hero">
-        <div class="eyebrow">🧰 terminal setup</div>
-        <h1>macOS 下 Kaku + fish + Starship + Nerd Font + Catppuccin Powerline 配置</h1>
-        <p class="lead">这篇文章基于我当前机器上的配置整理：Kaku 负责终端窗口和 shell 集成，fish 做默认 shell，Starship 生成 prompt，JetBrainsMono Nerd Font 和 Symbols Nerd Font 提供图标，Catppuccin Mocha 负责配色。</p>
-        <div class="meta">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>macOS 下 Kaku + fish + Starship + Nerd Font + Catppuccin Powerline 配置</title>
+		<meta name="description" content="基于本机配置整理的 macOS 终端配置笔记：Kaku、fish、Starship、JetBrainsMono Nerd Font 与 Catppuccin Powerline prompt。">
+		<link rel="stylesheet" type="text/css" href="/theme/kang/statics/css/index.css" media="all">
+		<link rel="stylesheet" type="text/css" href="/theme/kang/statics/css/detail.css">
+		<link rel="stylesheet" type="text/css" href="/theme/kang/statics/css/blog-post.css">
+	</head>
+
+	<body class="home blog custom-background round-avatars" itemscope itemtype="http://schema.org/Organization">
+		<div class="Yarn_Background" style="background-image: url(/theme/kang/statics/images/47fb3c_.jpg);"></div>
+
+		<form class="js-search search-form search-form--modal" method="get" action="/" role="search" aria-label="文章搜索">
+			<div class="search-form__inner">
+				<div>
+					<div id="search-container" class="ajax_search">
+						<div class="filter_container">
+							<input type="search" value="" autocomplete="off" placeholder="搜索文章" name="s" id="post-search-input" aria-label="搜索文章">
+							<ul id="post-search-results" class="search_filtered">
+							<li data-post-search="macos 数据库 gui 工具 dbx 部署 homebrew cask database mysql postgresql sqlite redis mongodb duckdb clickhouse"><a href="/posts/macos-database-gui-dbx-deploy/">MacOS数据库GUI工具-DBX部署</a></li>
+							<li data-post-search="macos 粘贴板 剪贴板 工具 maccy 安装 使用 homebrew clipboard 自动粘贴"><a href="/posts/mac-maccy-clipboard-manager/">mac下粘贴板工具-Maccy安装使用</a></li>
+							<li data-post-search="macos kaku fish starship nerd font catppuccin powerline terminal homebrew 终端 配置"><a href="/posts/mac-kaku-fish-starship-nerd-catppuccin-powerline/">macOS 下 Kaku + fish + Starship + Nerd Font + Catppuccin Powerline 配置</a></li>
+							</ul>
+							<p id="post-search-note" class="post-search-note">输入关键词后，选择要跳转的文章。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="navi" data-aos="fade-down">
+			<div class="bt-nav" aria-label="切换导航">
+				<div class="line line1"></div>
+				<div class="line line2"></div>
+				<div class="line line3"></div>
+			</div>
+			<div class="navbar animated fadeInRight">
+				<div class="inner">
+					<nav id="site-navigation" class="main-navigation" aria-label="站点导航">
+						<div id="main-menu" class="main-menu-container">
+							<div class="menu-menu-container">
+								<ul id="primary-menu" class="menu">
+									<li class="menu-item"><a href="/">首页</a></li>
+									<li class="menu-item current-menu-item current_page_item"><a href="#article">正文</a></li>
+									<li class="menu-item"><a href="/kangBlog/">模板预览</a></li>
+									<li class="menu-item"><a href="https://github.com/fjk0618">GitHub</a></li>
+									<li class="menu-item"><a href="https://262688.xyz">旧站</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+		<button class="hebin js-toggle-search" data-aos="fade-down" type="button" aria-label="打开文章搜索">
+			<i class="iconfont" aria-hidden="true">&#xe60e;</i>
+		</button>
+
+		<header id="masthead" class="overlay animated from-bottom" itemprop="brand">
+			<div class="site-branding text-center">
+				<a href="/" aria-label="返回首页">
+					<figure>
+						<img class="custom-logo avatar" src="/theme/kang/statics/images/omikron.png" alt="fjk0618 notes">
+					</figure>
+				</a>
+				<h1 class="site-title">fjk0618 notes</h1>
+				<h3 class="blog-description"><span>macOS 工具笔记 · Homebrew · GUI · CLI · AI Coding</span></h3>
+			</div>
+			<div class="decor-part">
+				<div id="particles-js"></div>
+			</div>
+			<div class="animation-header">
+				<div class="decor-wrapper">
+					<svg id="header-decor" class="decor bottom" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+						<path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+						<path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+						<path class="medium left" d="M0 100 L50 50 L0 33.3" fill="rgba(255,255,255, .3)"></path>
+						<path class="medium right" d="M100 100 L50 50 L100 33.3" fill="rgba(255,255,255, .3)"></path>
+						<path class="small left" d="M0 100 L50 50 L0 66.6" fill="rgba(255,255,255, .5)"></path>
+						<path class="small right" d="M100 100 L50 50 L100 66.6" fill="rgba(255,255,255, .5)"></path>
+						<path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="rgba(255,255,255, 1)"></path>
+						<path d="M48 52 L50 49 L52 52 L48 52" fill="rgba(255,255,255, 1)"></path>
+					</svg>
+				</div>
+			</div>
+		</header>
+
+		<div id="main" class="content">
+			<div class="container">
+				<article id="article" class="js-gallery post type-post status-publish format-standard hentry">
+					<section class="post_content" data-aos="fade-up">
+						<header class="post_header article-header">
+<div class="article-kicker">🧰 terminal setup</div>
+        <h1 class="post_title">macOS 下 Kaku + fish + Starship + Nerd Font + Catppuccin Powerline 配置</h1>
+        <p class="article-lead">这篇文章基于我当前机器上的配置整理：Kaku 负责终端窗口和 shell 集成，fish 做默认 shell，Starship 生成 prompt，JetBrainsMono Nerd Font 和 Symbols Nerd Font 提供图标，Catppuccin Mocha 负责配色。</p>
+        <div class="article-meta">
           <span class="pill">🗓️ 发布时间：2026-05-09</span>
           <span class="pill">🐟 fish 4.7.0</span>
           <span class="pill">🚀 Starship 1.25.1</span>
           <span class="pill">🧰 Kaku 0.9.0</span>
         </div>
-        <div class="emoji-strip" aria-label="文章重点标签">
+        <div class="article-tags" aria-label="文章重点标签">
           <span>🍺 Homebrew 安装</span>
           <span>🔤 Nerd Font</span>
           <span>🎨 Catppuccin Mocha</span>
@@ -41,12 +115,20 @@
             <span class="seg seg-os">󰀵 fujikang</span><span class="seg sep" style="background: var(--peach); color: var(--red);"></span><span class="seg seg-dir">~/Developer</span><span class="seg sep" style="background: var(--yellow); color: var(--peach);"></span><span class="seg seg-git"> main</span><span class="seg sep" style="background: var(--green); color: var(--yellow);"></span><span class="seg seg-lang"> 24</span><span class="seg sep" style="background: var(--lavender); color: var(--green);"></span><span class="seg seg-time"> 13:16</span><span class="seg sep" style="color: var(--lavender);"></span>
           </div>
         </div>
-      </section>
-
-      <div class="content">
-        <main>
-          <article>
-            <p>目标很简单：在 macOS 上用一套可复现、尽量少依赖插件管理器的方式，把终端配置成「打开 Kaku 就进入 fish，fish 自动加载 Starship，prompt 使用 Catppuccin Powerline，图标不乱码」的状态。下面的安装命令尽量使用 Homebrew。</p>
+						</header>
+						<nav class="post-toc" aria-label="文章目录">
+<strong>📚 目录</strong>
+          <a href="#environment"><span class="emoji" aria-hidden="true">🖥️</span>环境快照</a>
+          <a href="#install"><span class="emoji" aria-hidden="true">🍺</span>安装工具链</a>
+          <a href="#kaku"><span class="emoji" aria-hidden="true">🔌</span>Kaku 集成</a>
+          <a href="#kaku-config"><span class="emoji" aria-hidden="true">⚙️</span>Kaku 配置</a>
+          <a href="#fish"><span class="emoji" aria-hidden="true">🐟</span>fish 启动</a>
+          <a href="#starship"><span class="emoji" aria-hidden="true">🚀</span>Starship 主题</a>
+          <a href="#verify"><span class="emoji" aria-hidden="true">✅</span>验证</a>
+          <a href="#troubleshooting"><span class="emoji" aria-hidden="true">🧯</span>常见问题</a>
+						</nav>
+						<div class="post-body js-gallery">
+<p>目标很简单：在 macOS 上用一套可复现、尽量少依赖插件管理器的方式，把终端配置成「打开 Kaku 就进入 fish，fish 自动加载 Starship，prompt 使用 Catppuccin Powerline，图标不乱码」的状态。下面的安装命令尽量使用 Homebrew。</p>
 
             <div class="info-grid">
               <div class="info-box">
@@ -303,25 +385,69 @@ kaku doctor</code></pre>
 
             <h2 id="summary"><span class="emoji" aria-hidden="true">🧾</span>小结</h2>
             <p>这套配置的核心边界是：Kaku 管窗口、字体和 shell 集成；fish 管启动入口；Starship 管 prompt；Catppuccin palette 管颜色；Nerd Font 管图标。边界清楚之后，问题定位会简单很多：乱码先看字体，prompt 不出现先看 fish 初始化，Kaku wrapper 不生效先跑 <code>kaku doctor</code>。</p>
-          </article>
-        </main>
+						</div>
+						<div class="meta split split--responsive cf">
+							<div class="split__title">
+								<time datetime="2026-05-09">2026/05/09</time>
+								<span><a href="/">macOS</a><a href="/">Homebrew</a><a href="/">工具笔记</a></span>
+							</div>
+						</div>
+					</section>
+				</article>
+			</div>
+		</div>
 
-        <aside class="toc" aria-label="文章目录">
-          <strong>📚 目录</strong>
-          <a href="#environment"><span class="emoji" aria-hidden="true">🖥️</span>环境快照</a>
-          <a href="#install"><span class="emoji" aria-hidden="true">🍺</span>安装工具链</a>
-          <a href="#kaku"><span class="emoji" aria-hidden="true">🔌</span>Kaku 集成</a>
-          <a href="#kaku-config"><span class="emoji" aria-hidden="true">⚙️</span>Kaku 配置</a>
-          <a href="#fish"><span class="emoji" aria-hidden="true">🐟</span>fish 启动</a>
-          <a href="#starship"><span class="emoji" aria-hidden="true">🚀</span>Starship 主题</a>
-          <a href="#verify"><span class="emoji" aria-hidden="true">✅</span>验证</a>
-          <a href="#troubleshooting"><span class="emoji" aria-hidden="true">🧯</span>常见问题</a>
-        </aside>
-      </div>
+		<div class="p-header">
+			<figure class="p-image" style="background-image: url(/theme/kang/statics/images/Dcras.png);"></figure>
+		</div>
 
-      <footer class="footer">
-        📚 Published on GitHub Pages. Article source was prepared from local config files under <code>~/.config/fish</code>, <code>~/.config/kaku</code> and <code>~/.config/starship.toml</code>.
-      </footer>
-    </div>
-  </body>
+		<div class="navpost-part">
+			<div id="NextPrevPosts">
+				<div class="prev" data-aos="slide-right" data-aos-delay="1.5s">
+					<div class="arrow"><i class="iconfont">&#xe625;</i></div>
+					<div class="preview">
+						<div class="pull-left featuredImg" style="background-image:url('/theme/kang/statics/images/IMG_0150.jpg');"></div>
+						<a class="pull-left preview-content bold" href="/posts/mac-maccy-clipboard-manager/"><span>mac下粘贴板工具-Maccy安装使用</span></a>
+					</div>
+				</div>
+				<div class="next" data-aos="slide-left" data-aos-delay="1.5s">
+					<div class="arrow"><i class="iconfont">&#xe623;</i></div>
+					<div class="preview">
+						<div class="pull-right featuredImg" style="background-image:url('/theme/kang/statics/images/no-image.png');"></div>
+						<a class="pull-right preview-content bold" href="/posts/macos-database-gui-dbx-deploy/"><span>MacOS数据库GUI工具-DBX部署</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer id="footer" class="overlay animated from-top">
+			<div class="decor-wrapper">
+				<svg id="footer-decor" class="decor top" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+					<path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+					<path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+					<path class="medium left" d="M0 0 L50 50 L0 66.6" fill="rgba(255,255,255, .3)"></path>
+					<path class="medium right" d="M100 0 L50 50 L100 66.6" fill="rgba(255,255,255, .3)"></path>
+					<path class="small left" d="M0 0 L50 50 L0 33.3" fill="rgba(255,255,255, .5)"></path>
+					<path class="small right" d="M100 0 L50 50 L100 33.3" fill="rgba(255,255,255, .5)"></path>
+					<path d="M0 0 L50 50 L100 0 L0 0" fill="rgba(255,255,255, 1)"></path>
+					<path d="M48 48 L50 51 L52 48 L48 48" fill="rgba(255,255,255, 1)"></path>
+				</svg>
+			</div>
+			<ul class="socialize" data-aos="zoom-in">
+				<li><a title="GitHub" class="socialicon" href="https://github.com/fjk0618"><i class="iconfont" aria-hidden="true">&#xe616;</i></a></li>
+				<li><a title="旧站" class="socialicon" href="https://262688.xyz"><i class="iconfont" aria-hidden="true">&#xe609;</i></a></li>
+			</ul>
+			<div class="cr">Copyright&copy;2026. Design adapted from <a href="/kangBlog/">kangBlog</a></div>
+			<p class="article-source">📚 Published on GitHub Pages. Article source was prepared from local config files under <code>~/.config/fish</code>, <code>~/.config/kaku</code> and <code>~/.config/starship.toml</code>.</p>
+		</footer>
+
+		<script type="text/javascript" src="/theme/kang/statics/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/plugins.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/script.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/particles.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/aos.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/prism.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/blog-post.js"></script>
+	</body>
+
 </html>

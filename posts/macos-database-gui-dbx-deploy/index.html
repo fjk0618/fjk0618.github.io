@@ -1,47 +1,129 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MacOS数据库GUI工具-DBX部署</title>
-    <meta name="description" content="记录 macOS 上通过 Homebrew cask 安装、启动、升级和卸载 DBX 数据库 GUI 工具的流程，并补充首次连接和安全使用建议。">
-    <link rel="stylesheet" href="/styles.css">
-  </head>
-  <body>
-    <div class="site">
-      <header class="topbar">
-        <a class="brand" href="/">
-          <span class="brand-mark">❯</span>
-          <span>fjk0618 notes</span>
-        </a>
-        <nav class="nav" aria-label="站点导航">
-          <a href="/">首页</a>
-          <a href="https://github.com/fjk0618/fjk0618.github.io">仓库</a>
-        </nav>
-      </header>
 
-      <section class="hero">
-        <div class="eyebrow">🗄️ database gui</div>
-        <h1>MacOS数据库GUI工具-DBX部署</h1>
-        <p class="lead">DBX 是一个轻量的开源数据库管理工具，桌面端基于 Tauri，不内嵌 Chromium。它适合把日常开发里分散的 MySQL、PostgreSQL、SQLite、Redis、MongoDB、DuckDB、ClickHouse 等连接收敛到一个 GUI 里。</p>
-        <div class="meta">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>MacOS数据库GUI工具-DBX部署</title>
+		<meta name="description" content="记录 macOS 上通过 Homebrew cask 安装、启动、升级和卸载 DBX 数据库 GUI 工具的流程，并补充首次连接和安全使用建议。">
+		<link rel="stylesheet" type="text/css" href="/theme/kang/statics/css/index.css" media="all">
+		<link rel="stylesheet" type="text/css" href="/theme/kang/statics/css/detail.css">
+		<link rel="stylesheet" type="text/css" href="/theme/kang/statics/css/blog-post.css">
+	</head>
+
+	<body class="home blog custom-background round-avatars" itemscope itemtype="http://schema.org/Organization">
+		<div class="Yarn_Background" style="background-image: url(/theme/kang/statics/images/47fb3c_.jpg);"></div>
+
+		<form class="js-search search-form search-form--modal" method="get" action="/" role="search" aria-label="文章搜索">
+			<div class="search-form__inner">
+				<div>
+					<div id="search-container" class="ajax_search">
+						<div class="filter_container">
+							<input type="search" value="" autocomplete="off" placeholder="搜索文章" name="s" id="post-search-input" aria-label="搜索文章">
+							<ul id="post-search-results" class="search_filtered">
+							<li data-post-search="macos 数据库 gui 工具 dbx 部署 homebrew cask database mysql postgresql sqlite redis mongodb duckdb clickhouse"><a href="/posts/macos-database-gui-dbx-deploy/">MacOS数据库GUI工具-DBX部署</a></li>
+							<li data-post-search="macos 粘贴板 剪贴板 工具 maccy 安装 使用 homebrew clipboard 自动粘贴"><a href="/posts/mac-maccy-clipboard-manager/">mac下粘贴板工具-Maccy安装使用</a></li>
+							<li data-post-search="macos kaku fish starship nerd font catppuccin powerline terminal homebrew 终端 配置"><a href="/posts/mac-kaku-fish-starship-nerd-catppuccin-powerline/">macOS 下 Kaku + fish + Starship + Nerd Font + Catppuccin Powerline 配置</a></li>
+							</ul>
+							<p id="post-search-note" class="post-search-note">输入关键词后，选择要跳转的文章。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="navi" data-aos="fade-down">
+			<div class="bt-nav" aria-label="切换导航">
+				<div class="line line1"></div>
+				<div class="line line2"></div>
+				<div class="line line3"></div>
+			</div>
+			<div class="navbar animated fadeInRight">
+				<div class="inner">
+					<nav id="site-navigation" class="main-navigation" aria-label="站点导航">
+						<div id="main-menu" class="main-menu-container">
+							<div class="menu-menu-container">
+								<ul id="primary-menu" class="menu">
+									<li class="menu-item"><a href="/">首页</a></li>
+									<li class="menu-item current-menu-item current_page_item"><a href="#article">正文</a></li>
+									<li class="menu-item"><a href="/kangBlog/">模板预览</a></li>
+									<li class="menu-item"><a href="https://github.com/fjk0618">GitHub</a></li>
+									<li class="menu-item"><a href="https://262688.xyz">旧站</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+		<button class="hebin js-toggle-search" data-aos="fade-down" type="button" aria-label="打开文章搜索">
+			<i class="iconfont" aria-hidden="true">&#xe60e;</i>
+		</button>
+
+		<header id="masthead" class="overlay animated from-bottom" itemprop="brand">
+			<div class="site-branding text-center">
+				<a href="/" aria-label="返回首页">
+					<figure>
+						<img class="custom-logo avatar" src="/theme/kang/statics/images/omikron.png" alt="fjk0618 notes">
+					</figure>
+				</a>
+				<h1 class="site-title">fjk0618 notes</h1>
+				<h3 class="blog-description"><span>macOS 工具笔记 · Homebrew · GUI · CLI · AI Coding</span></h3>
+			</div>
+			<div class="decor-part">
+				<div id="particles-js"></div>
+			</div>
+			<div class="animation-header">
+				<div class="decor-wrapper">
+					<svg id="header-decor" class="decor bottom" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+						<path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+						<path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+						<path class="medium left" d="M0 100 L50 50 L0 33.3" fill="rgba(255,255,255, .3)"></path>
+						<path class="medium right" d="M100 100 L50 50 L100 33.3" fill="rgba(255,255,255, .3)"></path>
+						<path class="small left" d="M0 100 L50 50 L0 66.6" fill="rgba(255,255,255, .5)"></path>
+						<path class="small right" d="M100 100 L50 50 L100 66.6" fill="rgba(255,255,255, .5)"></path>
+						<path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="rgba(255,255,255, 1)"></path>
+						<path d="M48 52 L50 49 L52 52 L48 52" fill="rgba(255,255,255, 1)"></path>
+					</svg>
+				</div>
+			</div>
+		</header>
+
+		<div id="main" class="content">
+			<div class="container">
+				<article id="article" class="js-gallery post type-post status-publish format-standard hentry">
+					<section class="post_content" data-aos="fade-up">
+						<header class="post_header article-header">
+<div class="article-kicker">🗄️ database gui</div>
+        <h1 class="post_title">MacOS数据库GUI工具-DBX部署</h1>
+        <p class="article-lead">DBX 是一个轻量的开源数据库管理工具，桌面端基于 Tauri，不内嵌 Chromium。它适合把日常开发里分散的 MySQL、PostgreSQL、SQLite、Redis、MongoDB、DuckDB、ClickHouse 等连接收敛到一个 GUI 里。</p>
+        <div class="article-meta">
           <span class="pill">🗓️ 发布时间：2026-05-09</span>
           <span class="pill">🍺 Homebrew cask</span>
           <span class="pill">🗄️ DBX 0.5.0</span>
           <span class="pill">🍎 macOS 11+</span>
         </div>
-        <div class="emoji-strip" aria-label="文章重点标签">
+        <div class="article-tags" aria-label="文章重点标签">
           <span>⚡ 轻量桌面端</span>
           <span>🔍 SQL 编辑器</span>
           <span>🔐 连接安全</span>
           <span>🧰 多数据库管理</span>
         </div>
-      </section>
-
-      <div class="content">
-        <main>
-          <article>
-            <p>这篇只记录 macOS 桌面端的部署方式，安装主线走 Homebrew。DBX 也提供 Docker 自托管版本和 MCP Server，但如果目标是本机数据库 GUI 工具，先把桌面端安装、启动、连接和升级路径跑通就够了。</p>
+						</header>
+						<nav class="post-toc" aria-label="文章目录">
+<strong>📚 目录</strong>
+          <a href="#why"><span class="emoji" aria-hidden="true">🧭</span>为什么用 DBX</a>
+          <a href="#prepare"><span class="emoji" aria-hidden="true">🧱</span>准备条件</a>
+          <a href="#install"><span class="emoji" aria-hidden="true">🍺</span>Homebrew 安装</a>
+          <a href="#first-run"><span class="emoji" aria-hidden="true">🚀</span>首次启动</a>
+          <a href="#workflow"><span class="emoji" aria-hidden="true">🔍</span>常用工作流</a>
+          <a href="#upgrade"><span class="emoji" aria-hidden="true">🔁</span>升级卸载</a>
+          <a href="#verify"><span class="emoji" aria-hidden="true">✅</span>验证</a>
+          <a href="#notes"><span class="emoji" aria-hidden="true">🧯</span>使用建议</a>
+						</nav>
+						<div class="post-body js-gallery">
+<p>这篇只记录 macOS 桌面端的部署方式，安装主线走 Homebrew。DBX 也提供 Docker 自托管版本和 MCP Server，但如果目标是本机数据库 GUI 工具，先把桌面端安装、启动、连接和升级路径跑通就够了。</p>
 
             <div class="info-grid">
               <div class="info-box">
@@ -130,29 +212,71 @@ open -a DBX</code></pre>
             <h2 id="notes"><span class="emoji" aria-hidden="true">🧯</span>几个使用建议</h2>
             <p>第一，连接生产库时尽量使用只读账号，把颜色和名称设置得足够醒目。第二，GUI 适合排查、浏览和少量操作，不适合替代迁移脚本和审核流程。第三，连接配置涉及账号、主机和隧道信息，导出配置前确认是否包含敏感内容。</p>
             <p>第四，Homebrew cask 版本可能比你本机已安装版本新。看到 <code>brew info</code> 里 “Installed” 和顶部版本不一致时，直接执行 <code>brew upgrade --cask t8y2/tap/dbx</code>。</p>
-          </article>
-        </main>
+						</div>
+						<div class="meta split split--responsive cf">
+							<div class="split__title">
+								<time datetime="2026-05-09">2026/05/09</time>
+								<span><a href="/">macOS</a><a href="/">Homebrew</a><a href="/">工具笔记</a></span>
+							</div>
+						</div>
+					</section>
+				</article>
+			</div>
+		</div>
 
-        <aside class="toc" aria-label="文章目录">
-          <strong>📚 目录</strong>
-          <a href="#why"><span class="emoji" aria-hidden="true">🧭</span>为什么用 DBX</a>
-          <a href="#prepare"><span class="emoji" aria-hidden="true">🧱</span>准备条件</a>
-          <a href="#install"><span class="emoji" aria-hidden="true">🍺</span>Homebrew 安装</a>
-          <a href="#first-run"><span class="emoji" aria-hidden="true">🚀</span>首次启动</a>
-          <a href="#workflow"><span class="emoji" aria-hidden="true">🔍</span>常用工作流</a>
-          <a href="#upgrade"><span class="emoji" aria-hidden="true">🔁</span>升级卸载</a>
-          <a href="#verify"><span class="emoji" aria-hidden="true">✅</span>验证</a>
-          <a href="#notes"><span class="emoji" aria-hidden="true">🧯</span>使用建议</a>
-        </aside>
-      </div>
+		<div class="p-header">
+			<figure class="p-image" style="background-image: url(/theme/kang/statics/images/47fb3c_9afed6c259f94589881bd55376206366mv2_d_3840_5784_s_4_2.jpg);"></figure>
+		</div>
 
-      <footer class="footer">
-        📚 原始资料参考 DBX 官方 README 和 Homebrew cask；本文按 macOS 桌面端部署流程重新整理。
-      </footer>
-    </div>
+		<div class="navpost-part">
+			<div id="NextPrevPosts">
+				<div class="prev" data-aos="slide-right" data-aos-delay="1.5s">
+					<div class="arrow"><i class="iconfont">&#xe625;</i></div>
+					<div class="preview">
+						<div class="pull-left featuredImg" style="background-image:url('/theme/kang/statics/images/Dcras.png');"></div>
+						<a class="pull-left preview-content bold" href="/posts/mac-kaku-fish-starship-nerd-catppuccin-powerline/"><span>macOS 下 Kaku + fish + Starship 配置</span></a>
+					</div>
+				</div>
+				<div class="next" data-aos="slide-left" data-aos-delay="1.5s">
+					<div class="arrow"><i class="iconfont">&#xe623;</i></div>
+					<div class="preview">
+						<div class="pull-right featuredImg" style="background-image:url('/theme/kang/statics/images/IMG_0150.jpg');"></div>
+						<a class="pull-right preview-content bold" href="/posts/mac-maccy-clipboard-manager/"><span>mac下粘贴板工具-Maccy安装使用</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <script>
-      (function () {
+		<footer id="footer" class="overlay animated from-top">
+			<div class="decor-wrapper">
+				<svg id="footer-decor" class="decor top" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+					<path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+					<path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+					<path class="medium left" d="M0 0 L50 50 L0 66.6" fill="rgba(255,255,255, .3)"></path>
+					<path class="medium right" d="M100 0 L50 50 L100 66.6" fill="rgba(255,255,255, .3)"></path>
+					<path class="small left" d="M0 0 L50 50 L0 33.3" fill="rgba(255,255,255, .5)"></path>
+					<path class="small right" d="M100 0 L50 50 L100 33.3" fill="rgba(255,255,255, .5)"></path>
+					<path d="M0 0 L50 50 L100 0 L0 0" fill="rgba(255,255,255, 1)"></path>
+					<path d="M48 48 L50 51 L52 48 L48 48" fill="rgba(255,255,255, 1)"></path>
+				</svg>
+			</div>
+			<ul class="socialize" data-aos="zoom-in">
+				<li><a title="GitHub" class="socialicon" href="https://github.com/fjk0618"><i class="iconfont" aria-hidden="true">&#xe616;</i></a></li>
+				<li><a title="旧站" class="socialicon" href="https://262688.xyz"><i class="iconfont" aria-hidden="true">&#xe609;</i></a></li>
+			</ul>
+			<div class="cr">Copyright&copy;2026. Design adapted from <a href="/kangBlog/">kangBlog</a></div>
+			<p class="article-source">📚 原始资料参考 DBX 官方 README 和 Homebrew cask；本文按 macOS 桌面端部署流程重新整理。</p>
+		</footer>
+
+		<script type="text/javascript" src="/theme/kang/statics/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/plugins.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/script.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/particles.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/aos.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/prism.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/blog-post.js"></script>
+		<script>
+(function () {
         var target = document.getElementById('dbx-stars');
         if (!target) return;
 
@@ -171,6 +295,7 @@ open -a DBX</code></pre>
             target.textContent = '打开仓库查看最新 Stars';
           });
       }());
-    </script>
-  </body>
+		</script>
+	</body>
+
 </html>
