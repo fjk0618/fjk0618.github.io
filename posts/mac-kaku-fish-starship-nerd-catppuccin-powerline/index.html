@@ -21,14 +21,20 @@
       </header>
 
       <section class="hero">
-        <div class="eyebrow">terminal setup</div>
+        <div class="eyebrow">🧰 terminal setup</div>
         <h1>macOS 下 Kaku + fish + Starship + Nerd Font + Catppuccin Powerline 配置</h1>
         <p class="lead">这篇文章基于我当前机器上的配置整理：Kaku 负责终端窗口和 shell 集成，fish 做默认 shell，Starship 生成 prompt，JetBrainsMono Nerd Font 和 Symbols Nerd Font 提供图标，Catppuccin Mocha 负责配色。</p>
         <div class="meta">
-          <span class="pill">发布时间：2026-05-09</span>
-          <span class="pill">fish 4.7.0</span>
-          <span class="pill">Starship 1.25.1</span>
-          <span class="pill">Kaku 0.9.0</span>
+          <span class="pill">🗓️ 发布时间：2026-05-09</span>
+          <span class="pill">🐟 fish 4.7.0</span>
+          <span class="pill">🚀 Starship 1.25.1</span>
+          <span class="pill">🧰 Kaku 0.9.0</span>
+        </div>
+        <div class="emoji-strip" aria-label="文章重点标签">
+          <span>🍺 Homebrew 安装</span>
+          <span>🔤 Nerd Font</span>
+          <span>🎨 Catppuccin Mocha</span>
+          <span> Powerline prompt</span>
         </div>
         <div class="terminal-strip" aria-label="Prompt preview">
           <div class="terminal-line">
@@ -42,17 +48,28 @@
           <article>
             <p>目标很简单：在 macOS 上用一套可复现、尽量少依赖插件管理器的方式，把终端配置成「打开 Kaku 就进入 fish，fish 自动加载 Starship，prompt 使用 Catppuccin Powerline，图标不乱码」的状态。下面的安装命令尽量使用 Homebrew。</p>
 
-            <h2 id="environment">当前环境快照</h2>
+            <div class="info-grid">
+              <div class="info-box">
+                <strong><span class="emoji" aria-hidden="true">🧭</span>核心目标</strong>
+                <p>Kaku 打开即进入 fish，fish 加载 Starship，prompt 使用 Catppuccin Powerline。</p>
+              </div>
+              <div class="info-box">
+                <strong><span class="emoji" aria-hidden="true">📁</span>主要配置</strong>
+                <p><code>config.fish</code>、<code>kaku.lua</code>、<code>starship.toml</code></p>
+              </div>
+            </div>
+
+            <h2 id="environment"><span class="emoji" aria-hidden="true">🖥️</span>当前环境快照</h2>
             <p>这篇文章参考了当前本机配置，关键版本如下：</p>
-            <ul>
-              <li>Kaku：<code>0.9.0</code>，Homebrew cask 名称是 <code>kakuku</code>，来自 <code>tw93/homebrew-tap</code>。</li>
-              <li>fish：<code>4.7.0</code>。</li>
-              <li>Starship：<code>1.25.1</code>。</li>
-              <li>字体：<code>font-jetbrains-mono-nerd-font</code> 和 <code>font-symbols-only-nerd-font</code> 已安装到 <code>~/Library/Fonts</code>。</li>
-              <li>Homebrew 前缀：Apple Silicon 默认路径 <code>/opt/homebrew</code>。</li>
+            <ul class="emoji-list">
+              <li><span class="emoji" aria-hidden="true">🧰</span>Kaku：<code>0.9.0</code>，Homebrew cask 名称是 <code>kakuku</code>，来自 <code>tw93/homebrew-tap</code>。</li>
+              <li><span class="emoji" aria-hidden="true">🐟</span>fish：<code>4.7.0</code>。</li>
+              <li><span class="emoji" aria-hidden="true">🚀</span>Starship：<code>1.25.1</code>。</li>
+              <li><span class="emoji" aria-hidden="true">🔤</span>字体：<code>font-jetbrains-mono-nerd-font</code> 和 <code>font-symbols-only-nerd-font</code> 已安装到 <code>~/Library/Fonts</code>。</li>
+              <li><span class="emoji" aria-hidden="true">🍎</span>Homebrew 前缀：Apple Silicon 默认路径 <code>/opt/homebrew</code>。</li>
             </ul>
 
-            <h2 id="install">1. 用 Homebrew 安装工具链</h2>
+            <h2 id="install"><span class="emoji" aria-hidden="true">🍺</span>1. 用 Homebrew 安装工具链</h2>
             <p>先安装 shell、prompt、Kaku 和 Nerd Font。Kaku 当前的 cask 名叫 <code>kakuku</code>，安装后应用名仍然是 Kaku。</p>
 <pre><code class="language-bash">brew install fish starship
 
@@ -68,16 +85,16 @@ brew install --cask font-symbols-only-nerd-font</code></pre>
 
 chsh -s /opt/homebrew/bin/fish</code></pre>
 
-            <h2 id="kaku">2. 初始化 Kaku 的 fish 集成</h2>
+            <h2 id="kaku"><span class="emoji" aria-hidden="true">🔌</span>2. 初始化 Kaku 的 fish 集成</h2>
             <p>Kaku 自带 shell 集成，负责把 Kaku 管理的 wrapper 加入 PATH、处理 <code>TERM=kaku</code> 在 ssh/sudo 下的兼容问题，并上报工作目录和语义 prompt 区间。初始化命令是：</p>
 <pre><code class="language-bash">kaku init
 kaku doctor</code></pre>
 
             <p>当前机器上的 <code>kaku doctor</code> 是健康状态，重点信息包括：</p>
-            <ul>
-              <li><code>SHELL</code> 是 <code>/opt/homebrew/bin/fish</code>。</li>
-              <li><code>~/.config/fish/conf.d/kaku.fish</code> 存在，并会 source Kaku 管理的 fish 初始化文件。</li>
-              <li><code>~/.config/kaku/fish/bin/kaku</code> wrapper 可正常执行 <code>kaku --version</code>。</li>
+            <ul class="emoji-list">
+              <li><span class="emoji" aria-hidden="true">🐟</span><code>SHELL</code> 是 <code>/opt/homebrew/bin/fish</code>。</li>
+              <li><span class="emoji" aria-hidden="true">📄</span><code>~/.config/fish/conf.d/kaku.fish</code> 存在，并会 source Kaku 管理的 fish 初始化文件。</li>
+              <li><span class="emoji" aria-hidden="true">🧪</span><code>~/.config/kaku/fish/bin/kaku</code> wrapper 可正常执行 <code>kaku --version</code>。</li>
             </ul>
 
             <p><code>~/.config/fish/conf.d/kaku.fish</code> 的入口保持很薄，具体逻辑交给 Kaku 管理文件：</p>
@@ -87,9 +104,9 @@ if test -f $_kaku_fish_init
     source $_kaku_fish_init
 end</code></pre>
 
-            <p>注意：<code>~/.config/kaku/fish/kaku.fish</code> 是 Kaku 管理文件，里面会写 PATH、ssh/sudo TERM fix、OSC 7、OSC 133、OSC 1337 和常用 abbreviation。不要手改这个文件；需要刷新时用 <code>kaku init --update-only</code>，需要移除时用 <code>kaku reset</code>。</p>
+            <p class="note">⚠️ 注意：<code>~/.config/kaku/fish/kaku.fish</code> 是 Kaku 管理文件，里面会写 PATH、ssh/sudo TERM fix、OSC 7、OSC 133、OSC 1337 和常用 abbreviation。不要手改这个文件；需要刷新时用 <code>kaku init --update-only</code>，需要移除时用 <code>kaku reset</code>。</p>
 
-            <h2 id="kaku-config">3. 配置 Kaku 使用 fish</h2>
+            <h2 id="kaku-config"><span class="emoji" aria-hidden="true">⚙️</span>3. 配置 Kaku 使用 fish</h2>
             <p>Kaku 的配置文件位于 <code>~/.config/kaku/kaku.lua</code>。它兼容 WezTerm 的 Lua 配置 API，所以配置里会看到 <code>local wezterm = require 'wezterm'</code>。当前机器会先加载 Kaku 随应用附带的默认配置，再做少量覆盖：</p>
 <pre><code class="language-lua">config.font_size = 13
 config.tab_bar_at_bottom = true
@@ -103,7 +120,7 @@ config.default_prog = { '/opt/homebrew/bin/fish', '-l' }</code></pre>
 
             <p>如果 Powerline 分隔符或语言图标显示为方块，优先检查两件事：Kaku 当前 profile 使用的 font 是否是 Nerd Font，以及 <code>font-symbols-only-nerd-font</code> 是否已经安装。</p>
 
-            <h2 id="fish">4. 配置 fish 启动 Starship</h2>
+            <h2 id="fish"><span class="emoji" aria-hidden="true">🐟</span>4. 配置 fish 启动 Starship</h2>
             <p>当前 <code>~/.config/fish/config.fish</code> 只保留了必要逻辑：交互式 shell 初始化 Starship，并把 Go bin 目录加入 PATH。</p>
 <pre><code class="language-fish">if status is-interactive
     starship init fish | source
@@ -113,7 +130,7 @@ fish_add_path $HOME/go/bin</code></pre>
 
             <p>Kaku 的 managed fish 文件里也会在检测到 <code>starship</code> 时初始化 prompt。实际维护时建议保证 Starship 初始化只由一个稳定入口负责：个人配置放 <code>config.fish</code>，Kaku 管理内容保持自动生成，不手动改。</p>
 
-            <h2 id="starship">5. Starship 的 Catppuccin Powerline 配置</h2>
+            <h2 id="starship"><span class="emoji" aria-hidden="true">🚀</span>5. Starship 的 Catppuccin Powerline 配置</h2>
             <p>Starship 配置位于 <code>~/.config/starship.toml</code>。这套主题使用 Catppuccin Mocha 调色板，Powerline 左右分隔符是 <code></code>、<code></code> 和 <code></code>，模块顺序是 OS、用户名、目录、Git、语言运行时、Conda、时间、命令耗时和输入符号。</p>
 
 <pre><code class="language-toml">"$schema" = 'https://starship.rs/config-schema.json'
@@ -256,7 +273,7 @@ crust = "#11111b"</code></pre>
 
             <p>这不是 Starship 的唯一写法，但这套结构有两个优点：配色都从 palette 里来，后续切换 Catppuccin Frappe、Latte 或 Macchiato 时只需要替换 palette；prompt 的每段背景色和分隔符前景色一一对应，排查错色很直接。</p>
 
-            <h2 id="verify">6. 验证</h2>
+            <h2 id="verify"><span class="emoji" aria-hidden="true">✅</span>6. 验证</h2>
             <p>改完后建议按这个顺序验证：</p>
 <pre><code class="language-bash">fish --version
 starship --version
@@ -264,46 +281,46 @@ kaku --version
 kaku doctor</code></pre>
 
             <p>再打开 Kaku 新窗口，检查：</p>
-            <ol>
-              <li><code>echo $SHELL</code> 是否是 <code>/opt/homebrew/bin/fish</code>。</li>
-              <li><code>echo $PATH | string split ' ' | grep kaku</code> 是否能看到 <code>~/.config/kaku/fish/bin</code>。</li>
-              <li>prompt 是否显示 macOS 图标、Powerline 分隔符、Git 分支和时间。</li>
-              <li>进入一个 Git 仓库、Node/Go/Python 项目，确认对应语言模块会出现。</li>
+            <ol class="emoji-steps">
+              <li>🐟 <code>echo $SHELL</code> 是否是 <code>/opt/homebrew/bin/fish</code>。</li>
+              <li>🧭 <code>echo $PATH | string split ' ' | grep kaku</code> 是否能看到 <code>~/.config/kaku/fish/bin</code>。</li>
+              <li>🎨 prompt 是否显示 macOS 图标、Powerline 分隔符、Git 分支和时间。</li>
+              <li>🧪 进入一个 Git 仓库、Node/Go/Python 项目，确认对应语言模块会出现。</li>
             </ol>
 
-            <h2 id="troubleshooting">常见问题</h2>
-            <h3>图标显示为方块</h3>
+            <h2 id="troubleshooting"><span class="emoji" aria-hidden="true">🧯</span>常见问题</h2>
+            <h3><span class="emoji" aria-hidden="true">🔤</span>图标显示为方块</h3>
             <p>优先确认 Kaku 使用的是 Nerd Font。字体装了不代表终端一定在用它。建议选择 <code>JetBrainsMono Nerd Font</code>，并保留 <code>Symbols Nerd Font</code> 兜底。</p>
 
-            <h3>ssh 到远端后提示 unknown terminal type kaku</h3>
+            <h3><span class="emoji" aria-hidden="true">🌐</span>ssh 到远端后提示 unknown terminal type kaku</h3>
             <p>Kaku 的 fish 集成里已经对 <code>ssh</code> 做了包装：当本地 <code>TERM</code> 是 <code>kaku</code> 时，用 <code>TERM=xterm-256color</code> 调用 ssh。不要手动删除 Kaku managed 文件里的这段逻辑。</p>
 
-            <h3>sudo 下终端能力异常</h3>
+            <h3><span class="emoji" aria-hidden="true">🔐</span>sudo 下终端能力异常</h3>
             <p>同理，Kaku managed fish 文件也包装了 <code>sudo</code>，避免 root 环境缺失 <code>TERMINFO_DIRS</code> 后不认识 <code>kaku</code>。</p>
 
-            <h3>Starship 初始化重复</h3>
+            <h3><span class="emoji" aria-hidden="true">🔁</span>Starship 初始化重复</h3>
             <p>当前配置中，Kaku managed 文件和个人 <code>config.fish</code> 都包含 Starship 初始化。一般不会阻塞使用，但长期维护时更推荐只保留一个明确入口。个人习惯是把自定义逻辑放在 <code>~/.config/fish/config.fish</code>，Kaku 自动生成的部分只交给 <code>kaku init</code> 管。</p>
 
-            <h2 id="summary">小结</h2>
+            <h2 id="summary"><span class="emoji" aria-hidden="true">🧾</span>小结</h2>
             <p>这套配置的核心边界是：Kaku 管窗口、字体和 shell 集成；fish 管启动入口；Starship 管 prompt；Catppuccin palette 管颜色；Nerd Font 管图标。边界清楚之后，问题定位会简单很多：乱码先看字体，prompt 不出现先看 fish 初始化，Kaku wrapper 不生效先跑 <code>kaku doctor</code>。</p>
           </article>
         </main>
 
         <aside class="toc" aria-label="文章目录">
-          <strong>目录</strong>
-          <a href="#environment">环境快照</a>
-          <a href="#install">安装工具链</a>
-          <a href="#kaku">Kaku 集成</a>
-          <a href="#kaku-config">Kaku 配置</a>
-          <a href="#fish">fish 启动</a>
-          <a href="#starship">Starship 主题</a>
-          <a href="#verify">验证</a>
-          <a href="#troubleshooting">常见问题</a>
+          <strong>📚 目录</strong>
+          <a href="#environment"><span class="emoji" aria-hidden="true">🖥️</span>环境快照</a>
+          <a href="#install"><span class="emoji" aria-hidden="true">🍺</span>安装工具链</a>
+          <a href="#kaku"><span class="emoji" aria-hidden="true">🔌</span>Kaku 集成</a>
+          <a href="#kaku-config"><span class="emoji" aria-hidden="true">⚙️</span>Kaku 配置</a>
+          <a href="#fish"><span class="emoji" aria-hidden="true">🐟</span>fish 启动</a>
+          <a href="#starship"><span class="emoji" aria-hidden="true">🚀</span>Starship 主题</a>
+          <a href="#verify"><span class="emoji" aria-hidden="true">✅</span>验证</a>
+          <a href="#troubleshooting"><span class="emoji" aria-hidden="true">🧯</span>常见问题</a>
         </aside>
       </div>
 
       <footer class="footer">
-        Published on GitHub Pages. Article source was prepared from local config files under <code>~/.config/fish</code>, <code>~/.config/kaku</code> and <code>~/.config/starship.toml</code>.
+        📚 Published on GitHub Pages. Article source was prepared from local config files under <code>~/.config/fish</code>, <code>~/.config/kaku</code> and <code>~/.config/starship.toml</code>.
       </footer>
     </div>
   </body>
