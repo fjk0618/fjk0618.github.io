@@ -1,65 +1,337 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>fjk0618 的 macOS 工具笔记</title>
-    <meta name="description" content="macOS 开发环境、效率工具和终端配置笔记。">
-    <link rel="stylesheet" href="/styles.css">
-  </head>
-  <body>
-    <div class="site">
-      <header class="topbar">
-        <a class="brand" href="/">
-          <span class="brand-mark">❯</span>
-          <span>fjk0618 notes</span>
-        </a>
-        <nav class="nav" aria-label="站点导航">
-          <a href="https://github.com/fjk0618">GitHub</a>
-          <a href="https://262688.xyz">旧站</a>
-        </nav>
-      </header>
 
-      <section class="home-hero">
-        <div>
-          <div class="eyebrow">notes / macOS</div>
-          <h1 class="home-title">macOS 工具笔记</h1>
-          <p class="lead">记录 macOS 开发环境、效率工具、终端工具链和日常工程配置。文章尽量从真实使用场景出发，保留可复现命令和关键取舍。</p>
-        </div>
-        <div class="stack-panel" aria-label="当前笔记主题">
-          <span>macOS</span>
-          <span>Homebrew</span>
-          <span>DBX</span>
-          <span>Maccy</span>
-          <span>Kaku</span>
-          <span>Starship</span>
-        </div>
-      </section>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>fjk0618 notes | macOS 工具笔记</title>
+		<meta name="description" content="fjk0618 的 macOS 工具笔记，记录 Homebrew、开发环境、效率工具、终端工具链和 AI 编程工具配置。">
+		<meta name="keywords" content="macOS, Homebrew, DBX, Maccy, Kaku, fish, Starship">
+		<link rel="stylesheet" type="text/css" href="/theme/kang/statics/css/index.css" media="all">
+		<style>
+			.site-title {
+				margin: 12px 0 6px;
+				color: #fff;
+				font-size: 2rem;
+				letter-spacing: 0;
+			}
 
-      <main>
-        <div class="section-heading">最新文章</div>
-        <div class="post-list">
-          <a class="post-card" href="/posts/macos-database-gui-dbx-deploy/">
-            <span class="meta"><span class="pill">2026-05-09</span><span class="pill">macOS</span><span class="pill">database</span></span>
-            <h2>MacOS数据库GUI工具-DBX部署</h2>
-            <p>用 Homebrew cask 安装 DBX 数据库 GUI 工具，整理首次启动、连接安全、升级卸载和部署验证流程。</p>
-          </a>
-          <a class="post-card" href="/posts/mac-maccy-clipboard-manager/">
-            <span class="meta"><span class="pill">2026-05-09</span><span class="pill">macOS</span><span class="pill">clipboard</span></span>
-            <h2>mac下粘贴板工具-Maccy安装使用</h2>
-            <p>用 Homebrew 安装开源剪贴板管理器 Maccy，并开启“行为 > 自动粘贴”，让复制历史真正进入日常工作流。</p>
-          </a>
-          <a class="post-card" href="/posts/mac-kaku-fish-starship-nerd-catppuccin-powerline/">
-            <span class="meta"><span class="pill">2026-05-09</span><span class="pill">macOS</span><span class="pill">terminal</span></span>
-            <h2>macOS 下 Kaku + fish + Starship + Nerd Font + Catppuccin Powerline 配置</h2>
-            <p>以 Homebrew 为主线，记录当前机器上的 Kaku 0.9.0、fish 4.7.0、Starship 1.25.1 和 JetBrainsMono Nerd Font 的组合方式。</p>
-          </a>
-        </div>
-      </main>
+			.home-search-note {
+				margin: 12px 0 0;
+				color: rgba(255, 255, 255, 0.68);
+				font-size: 0.9rem;
+			}
 
-      <footer class="footer">
-        源码仓库：<a href="https://github.com/fjk0618/fjk0618.github.io">fjk0618/fjk0618.github.io</a>
-      </footer>
-    </div>
-  </body>
+			.post.is-filtered {
+				display: none;
+			}
+
+			.post-footer .post-tags {
+				color: rgba(0, 0, 0, 0.48);
+				font-size: 0.86rem;
+			}
+
+			button.hebin {
+				border: 0;
+				background: transparent;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body class="home blog custom-background round-avatars">
+		<div class="Yarn_Background" style="background-image: url(/theme/kang/statics/images/47fb3c_.jpg);"></div>
+
+		<form class="js-search search-form search-form--modal" method="get" action="#" role="search" aria-label="文章搜索">
+			<div class="search-form__inner">
+				<div>
+					<div id="search-container" class="ajax_search">
+						<div class="filter_container">
+							<input type="search" value="" autocomplete="off" placeholder="搜索标题、摘要、标签" name="s" id="home-search-input" aria-label="搜索文章">
+							<ul id="home-search-results" class="search_filtered"></ul>
+							<p id="home-search-note" class="home-search-note">输入关键词后，首页文章列表会同步筛选。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="navi" data-aos="fade-down">
+			<div class="bt-nav" aria-label="切换导航">
+				<div class="line line1"></div>
+				<div class="line line2"></div>
+				<div class="line line3"></div>
+			</div>
+			<div class="navbar animated fadeInRight">
+				<div class="inner">
+					<nav id="site-navigation" class="main-navigation" aria-label="站点导航">
+						<div id="main-menu" class="main-menu-container">
+							<div class="menu-menu-container">
+								<ul id="primary-menu" class="menu">
+									<li class="menu-item current-menu-item current_page_item menu-item-home">
+										<a href="/">首页</a>
+									</li>
+									<li class="menu-item">
+										<a href="#posts">文章</a>
+									</li>
+									<li class="menu-item">
+										<a href="/kangBlog/">模板预览</a>
+									</li>
+									<li class="menu-item">
+										<a href="https://github.com/fjk0618">GitHub</a>
+									</li>
+									<li class="menu-item">
+										<a href="https://262688.xyz">旧站</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+		<button class="hebin js-toggle-search" data-aos="fade-down" type="button" aria-label="打开文章搜索">
+			<i class="iconfont" aria-hidden="true">&#xe60e;</i>
+		</button>
+
+		<header id="masthead" class="overlay animated from-bottom" itemprop="brand">
+			<div class="site-branding text-center">
+				<a href="#posts" aria-label="查看最新文章">
+					<figure>
+						<img class="custom-logo avatar" src="/theme/kang/statics/images/omikron.png" alt="fjk0618 notes">
+					</figure>
+				</a>
+				<h1 class="site-title">fjk0618 notes</h1>
+				<h3 class="blog-description"><span>macOS 工具笔记 · Homebrew · GUI · CLI · AI Coding</span></h3>
+			</div>
+			<div class="decor-part">
+				<div id="particles-js"></div>
+			</div>
+			<div class="animation-header">
+				<div class="decor-wrapper">
+					<svg id="header-decor" class="decor bottom" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+						<path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+						<path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+						<path class="medium left" d="M0 100 L50 50 L0 33.3" fill="rgba(255,255,255, .3)"></path>
+						<path class="medium right" d="M100 100 L50 50 L100 33.3" fill="rgba(255,255,255, .3)"></path>
+						<path class="small left" d="M0 100 L50 50 L0 66.6" fill="rgba(255,255,255, .5)"></path>
+						<path class="small right" d="M100 100 L50 50 L100 66.6" fill="rgba(255,255,255, .5)"></path>
+						<path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="rgba(255,255,255, 1)"></path>
+						<path d="M48 52 L50 49 L52 52 L48 52" fill="rgba(255,255,255, 1)"></path>
+					</svg>
+				</div>
+			</div>
+		</header>
+
+		<div id="main" class="content">
+			<div class="container">
+				<article itemscope="itemscope">
+					<div id="posts" class="posts-list js-posts">
+						<div class="post post-layout-list" data-aos="fade-up">
+							<div class="status_list_item icon_kyubo">
+								<div class="status_user" style="background-image: url(/theme/kang/statics/images/b0ce3f3cde0c084b6d42321b2dcbc407.jpeg);">
+									<div class="status_section">
+										<a href="#posts" class="status_btn">慢就是快：macOS 工具笔记</a>
+										<p class="section_p">记录 macOS 开发环境、效率工具、终端工具链和日常工程配置。文章尽量从真实使用场景出发，保留可复现命令和关键取舍。</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="post post-layout-list js-home-post" data-aos="fade-up" data-searchable="true" data-search="macos 数据库 gui 工具 dbx 部署 homebrew cask database mysql postgresql sqlite redis mongodb duckdb clickhouse">
+							<div class="postnormal review">
+								<div class="post-container review-item">
+									<div class="row review-item-wrapper">
+										<div class="col-sm-3">
+											<a rel="nofollow" href="/posts/macos-database-gui-dbx-deploy/">
+												<div class="review-item-img" style="background-image: url(https://cdn.jsdelivr.net/gh/t8y2/dbx@main/docs/screenshot-dark.png);"></div>
+											</a>
+										</div>
+										<div class="col-sm-9 flex-xs-middle">
+											<div class="review-item-title">
+												<a href="/posts/macos-database-gui-dbx-deploy/" rel="bookmark">MacOS数据库GUI工具-DBX部署</a>
+											</div>
+											<div class="review-item-creator"><b>发布日期：</b>2026-05-09</div>
+											<span class="review-item-info"><b>标签：</b>macOS / Homebrew / database</span>
+										</div>
+									</div>
+									<div class="review-bg-wrapper">
+										<div class="bg-blur" style="background-image: url(https://cdn.jsdelivr.net/gh/t8y2/dbx@main/docs/screenshot-dark.png);"></div>
+									</div>
+								</div>
+								<div class="post-container">
+									<div class="entry-content">用 Homebrew cask 安装 DBX 数据库 GUI 工具，整理首次启动、连接安全、升级卸载和部署验证流程。</div>
+									<div class="post-footer">
+										<a class="gaz-btn primary" href="/posts/macos-database-gui-dbx-deploy/">READ MORE</a>
+										<span class="post-tags pull-right">DBX · GUI · cask</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="post post-layout-list js-home-post" data-aos="fade-up" data-searchable="true" data-search="macos 粘贴板 剪贴板 工具 maccy 安装 使用 homebrew clipboard 自动粘贴">
+							<div class="postnormal review">
+								<div class="post-container review-item">
+									<div class="row review-item-wrapper">
+										<div class="col-sm-3">
+											<a rel="nofollow" href="/posts/mac-maccy-clipboard-manager/">
+												<div class="review-item-img" style="background-image: url(/theme/kang/statics/images/IMG_0150.jpg);"></div>
+											</a>
+										</div>
+										<div class="col-sm-9 flex-xs-middle">
+											<div class="review-item-title">
+												<a href="/posts/mac-maccy-clipboard-manager/" rel="bookmark">mac下粘贴板工具-Maccy安装使用</a>
+											</div>
+											<div class="review-item-creator"><b>发布日期：</b>2026-05-09</div>
+											<span class="review-item-info"><b>标签：</b>macOS / clipboard / workflow</span>
+										</div>
+									</div>
+									<div class="review-bg-wrapper">
+										<div class="bg-blur" style="background-image: url(/theme/kang/statics/images/IMG_0150.jpg);"></div>
+									</div>
+								</div>
+								<div class="post-container">
+									<div class="entry-content">用 Homebrew 安装开源剪贴板管理器 Maccy，并开启“行为 > 自动粘贴”，让复制历史真正进入日常工作流。</div>
+									<div class="post-footer">
+										<a class="gaz-btn primary" href="/posts/mac-maccy-clipboard-manager/">READ MORE</a>
+										<span class="post-tags pull-right">Maccy · clipboard</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="post post-layout-list js-home-post" data-aos="fade-up" data-searchable="true" data-search="macos kaku fish starship nerd font catppuccin powerline terminal homebrew 终端 配置">
+							<div class="postnormal review">
+								<div class="post-container review-item">
+									<div class="row review-item-wrapper">
+										<div class="col-sm-3">
+											<a rel="nofollow" href="/posts/mac-kaku-fish-starship-nerd-catppuccin-powerline/">
+												<div class="review-item-img" style="background-image: url(/theme/kang/statics/images/Dcras.png);"></div>
+											</a>
+										</div>
+										<div class="col-sm-9 flex-xs-middle">
+											<div class="review-item-title">
+												<a href="/posts/mac-kaku-fish-starship-nerd-catppuccin-powerline/" rel="bookmark">macOS 下 Kaku + fish + Starship + Nerd Font + Catppuccin Powerline 配置</a>
+											</div>
+											<div class="review-item-creator"><b>发布日期：</b>2026-05-09</div>
+											<span class="review-item-info"><b>标签：</b>macOS / terminal / prompt</span>
+										</div>
+									</div>
+									<div class="review-bg-wrapper">
+										<div class="bg-blur" style="background-image: url(/theme/kang/statics/images/Dcras.png);"></div>
+									</div>
+								</div>
+								<div class="post-container">
+									<div class="entry-content">以 Homebrew 为主线，记录当前机器上的 Kaku、fish、Starship 和 JetBrainsMono Nerd Font 的组合方式。</div>
+									<div class="post-footer">
+										<a class="gaz-btn primary" href="/posts/mac-kaku-fish-starship-nerd-catppuccin-powerline/">READ MORE</a>
+										<span class="post-tags pull-right">Kaku · Starship</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+			</div>
+		</div>
+
+		<footer id="footer" class="overlay animated from-top">
+			<div class="decor-wrapper">
+				<svg id="footer-decor" class="decor top" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+					<path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+					<path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+					<path class="medium left" d="M0 0 L50 50 L0 66.6" fill="rgba(255,255,255, .3)"></path>
+					<path class="medium right" d="M100 0 L50 50 L100 66.6" fill="rgba(255,255,255, .3)"></path>
+					<path class="small left" d="M0 0 L50 50 L0 33.3" fill="rgba(255,255,255, .5)"></path>
+					<path class="small right" d="M100 0 L50 50 L100 33.3" fill="rgba(255,255,255, .5)"></path>
+					<path d="M0 0 L50 50 L100 0 L0 0" fill="rgba(255,255,255, 1)"></path>
+					<path d="M48 48 L50 51 L52 48 L48 48" fill="rgba(255,255,255, 1)"></path>
+				</svg>
+			</div>
+			<ul class="socialize" data-aos="zoom-in">
+				<li>
+					<a title="GitHub" class="socialicon" href="https://github.com/fjk0618"><i class="iconfont" aria-hidden="true">&#xe616;</i></a>
+				</li>
+				<li>
+					<a title="旧站" class="socialicon" href="https://262688.xyz"><i class="iconfont" aria-hidden="true">&#xe609;</i></a>
+				</li>
+			</ul>
+			<div class="cr">
+				Copyright&copy;2026. Design adapted from
+				<a href="/kangBlog/">kangBlog</a>
+			</div>
+		</footer>
+
+		<script type="text/javascript" src="/theme/kang/statics/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/plugins.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/script.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/particles.js"></script>
+		<script type="text/javascript" src="/theme/kang/statics/js/aos.js"></script>
+		<script>
+			(function () {
+				var form = document.querySelector('.js-search');
+				var input = document.getElementById('home-search-input');
+				var results = document.getElementById('home-search-results');
+				var note = document.getElementById('home-search-note');
+				var posts = Array.prototype.slice.call(document.querySelectorAll('[data-searchable="true"]'));
+
+				function createResult(post) {
+					var link = post.querySelector('.review-item-title a');
+					var item = document.createElement('li');
+					var anchor = document.createElement('a');
+					anchor.href = link.href;
+					anchor.textContent = link.textContent;
+					item.appendChild(anchor);
+					return item;
+				}
+
+				function updateSearch(query) {
+					var normalized = query.trim().toLowerCase();
+					var matched = posts.filter(function (post) {
+						return !normalized || post.dataset.search.indexOf(normalized) !== -1;
+					});
+
+					posts.forEach(function (post) {
+						post.classList.toggle('is-filtered', matched.indexOf(post) === -1);
+					});
+
+					if (!results || !note) return;
+
+					results.innerHTML = '';
+					if (!normalized) {
+						note.textContent = '输入关键词后，首页文章列表会同步筛选。';
+						return;
+					}
+
+					note.textContent = matched.length + ' 篇匹配结果';
+					if (!matched.length) {
+						var empty = document.createElement('li');
+						var label = document.createElement('a');
+						label.href = 'javascript:void(0)';
+						label.textContent = '没有找到匹配文章';
+						empty.appendChild(label);
+						results.appendChild(empty);
+						return;
+					}
+
+					matched.forEach(function (post) {
+						results.appendChild(createResult(post));
+					});
+				}
+
+				if (form && input) {
+					form.addEventListener('submit', function (event) {
+						event.preventDefault();
+						updateSearch(input.value);
+					});
+
+					input.addEventListener('input', function () {
+						updateSearch(input.value);
+					});
+				}
+			}());
+		</script>
+	</body>
+
 </html>
