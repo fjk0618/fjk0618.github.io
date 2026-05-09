@@ -21,14 +21,20 @@
       </header>
 
       <section class="hero">
-        <div class="eyebrow">macOS clipboard</div>
+        <div class="eyebrow">📋 macOS clipboard</div>
         <h1>mac下粘贴板工具-Maccy安装使用</h1>
         <p class="lead">Maccy 是一个轻量、开源、键盘优先的 macOS 剪贴板管理器。它解决的不是“复制”本身，而是复制之后经常丢、经常找、经常重复复制的问题。</p>
         <div class="meta">
-          <span class="pill">发布时间：2026-05-09</span>
-          <span class="pill">Homebrew</span>
-          <span class="pill">Maccy</span>
-          <span class="pill">clipboard</span>
+          <span class="pill">🗓️ 发布时间：2026-05-09</span>
+          <span class="pill">🍺 Homebrew</span>
+          <span class="pill">📋 Maccy</span>
+          <span class="pill">🔁 自动粘贴</span>
+        </div>
+        <div class="emoji-strip" aria-label="文章重点标签">
+          <span>⌨️ 键盘优先</span>
+          <span>⚡ 快速检索</span>
+          <span>🔍 可搜索历史</span>
+          <span>🔒 隐私提醒</span>
         </div>
       </section>
 
@@ -37,76 +43,76 @@
           <article>
             <div class="info-grid">
               <div class="info-box">
-                <strong>原仓库</strong>
+                <strong><span class="emoji" aria-hidden="true">🔗</span>原仓库</strong>
                 <p><a href="https://github.com/p0deje/Maccy">github.com/p0deje/Maccy</a></p>
               </div>
               <div class="info-box">
-                <strong>GitHub Stars</strong>
+                <strong><span class="emoji" aria-hidden="true">⭐</span>GitHub Stars</strong>
                 <p><a href="https://github.com/p0deje/Maccy/stargazers"><span id="maccy-stars">自动获取中...</span></a></p>
               </div>
             </div>
 
-            <h2 id="why">为什么需要剪贴板工具</h2>
+            <h2 id="why"><span class="emoji" aria-hidden="true">🧩</span>为什么需要剪贴板工具</h2>
             <p>macOS 自带剪贴板一次只能保留当前内容。写代码、改配置、整理文档时，经常会在命令、路径、错误信息、链接、验证码和短文本之间反复复制。没有历史记录时，只要复制了新内容，前一个内容就被覆盖了。</p>
             <p>Maccy 的价值在这里：它把最近复制过的内容保存成可搜索历史。需要旧内容时，用快捷键呼出，输入几个关键词，选中后直接用。它适合每天需要在多个窗口、终端、浏览器和编辑器之间来回搬运文本的人。</p>
 
-            <h2 id="install">用 Homebrew 安装</h2>
+            <h2 id="install"><span class="emoji" aria-hidden="true">🍺</span>用 Homebrew 安装</h2>
             <p>官方文档提供了 release 下载和 Homebrew 两种方式。日常维护更推荐 Homebrew，升级和卸载都更清晰。</p>
 <pre><code class="language-bash">brew install maccy
 open -a Maccy</code></pre>
 
             <p>第一次启动后，Maccy 会出现在菜单栏。默认使用 <code>Shift + Command + C</code> 呼出历史窗口，也可以点击菜单栏图标打开。</p>
 
-            <h2 id="workflow">基本使用方式</h2>
-            <ol>
-              <li>像平时一样复制文本、链接或命令。</li>
-              <li>按 <code>Shift + Command + C</code> 打开 Maccy。</li>
-              <li>输入关键词搜索历史项。</li>
-              <li>回车或点击选择需要的内容。</li>
+            <h2 id="workflow"><span class="emoji" aria-hidden="true">⌨️</span>基本使用方式</h2>
+            <ol class="emoji-steps">
+              <li>📋 像平时一样复制文本、链接或命令。</li>
+              <li>⌨️ 按 <code>Shift + Command + C</code> 打开 Maccy。</li>
+              <li>🔍 输入关键词搜索历史项。</li>
+              <li>✅ 回车或点击选择需要的内容。</li>
             </ol>
 
             <p>如果你只是偶尔找回一段刚复制过的内容，默认行为已经够用。但如果想把它变成高频工作流，建议继续做下面这个设置。</p>
 
-            <h2 id="auto-paste">体验优化：开启自动粘贴</h2>
+            <h2 id="auto-paste"><span class="emoji" aria-hidden="true">⚡</span>体验优化：开启自动粘贴</h2>
             <p>Maccy 默认偏保守，选中历史项时更像“把它重新放回剪贴板”。我更推荐打开自动粘贴：选中历史项后直接粘到当前光标所在应用，少一次 <code>Command + V</code>，也更符合“搜索后立即使用”的心智模型。</p>
 
             <p class="setting-path" aria-label="设置路径">
-              <span>Maccy 设置</span>
-              <span>行为</span>
-              <span>自动粘贴</span>
+              <span>⚙️ Maccy 设置</span>
+              <span>🧭 行为</span>
+              <span>🚀 自动粘贴</span>
             </p>
 
             <p>打开路径是：菜单栏 Maccy 图标进入设置，找到 <strong>行为</strong>，开启 <strong>自动粘贴</strong>。这也是官方 FAQ 里解释“为什么选择历史项后没有粘贴”的关键设置之一。</p>
 
-            <p>如果开启后仍然不能自动粘贴，到 macOS 的 <strong>系统设置 > 隐私与安全性 > 辅助功能</strong>，确认 Maccy 已被允许控制电脑。自动粘贴需要这个权限，否则它无法把选中的历史内容发送到当前应用。</p>
+            <p class="note">🔐 如果开启后仍然不能自动粘贴，到 macOS 的 <strong>系统设置 &gt; 隐私与安全性 &gt; 辅助功能</strong>，确认 Maccy 已被允许控制电脑。自动粘贴需要这个权限，否则它无法把选中的历史内容发送到当前应用。</p>
 
-            <h2 id="benefits">适合哪些场景</h2>
-            <ul>
-              <li>终端里复制过命令、路径、环境变量，稍后又要找回来。</li>
-              <li>写文档时频繁搬运链接、标题、短句和 Markdown 片段。</li>
-              <li>调试时需要在浏览器、编辑器、日志和 issue 页面之间切换。</li>
-              <li>想保留轻量工具，不想让剪贴板管理器变成复杂的资料库。</li>
+            <h2 id="benefits"><span class="emoji" aria-hidden="true">🎯</span>适合哪些场景</h2>
+            <ul class="emoji-list">
+              <li><span class="emoji" aria-hidden="true">🧑‍💻</span>终端里复制过命令、路径、环境变量，稍后又要找回来。</li>
+              <li><span class="emoji" aria-hidden="true">📝</span>写文档时频繁搬运链接、标题、短句和 Markdown 片段。</li>
+              <li><span class="emoji" aria-hidden="true">🧪</span>调试时需要在浏览器、编辑器、日志和 issue 页面之间切换。</li>
+              <li><span class="emoji" aria-hidden="true">🧰</span>想保留轻量工具，不想让剪贴板管理器变成复杂的资料库。</li>
             </ul>
 
-            <h2 id="notes">几个使用建议</h2>
+            <h2 id="notes"><span class="emoji" aria-hidden="true">🔒</span>几个使用建议</h2>
             <p>第一，剪贴板历史会涉及隐私，密码、token、密钥这类内容尽量交给密码管理器，不要依赖剪贴板长期保存。第二，Maccy 支持忽略复制事件和忽略特定 pasteboard 类型；如果你的工作流经常复制敏感内容，可以再去设置里收紧规则。</p>
             <p>第三，记住一个快捷键就够了：<code>Shift + Command + C</code>。把它当成“打开复制历史”的入口，其他操作等真的需要时再学。</p>
           </article>
         </main>
 
         <aside class="toc" aria-label="文章目录">
-          <strong>目录</strong>
-          <a href="#why">为什么需要</a>
-          <a href="#install">安装</a>
-          <a href="#workflow">基本使用</a>
-          <a href="#auto-paste">自动粘贴</a>
-          <a href="#benefits">适用场景</a>
-          <a href="#notes">使用建议</a>
+          <strong>📚 目录</strong>
+          <a href="#why"><span class="emoji" aria-hidden="true">🧩</span>为什么需要</a>
+          <a href="#install"><span class="emoji" aria-hidden="true">🍺</span>安装</a>
+          <a href="#workflow"><span class="emoji" aria-hidden="true">⌨️</span>基本使用</a>
+          <a href="#auto-paste"><span class="emoji" aria-hidden="true">⚡</span>自动粘贴</a>
+          <a href="#benefits"><span class="emoji" aria-hidden="true">🎯</span>适用场景</a>
+          <a href="#notes"><span class="emoji" aria-hidden="true">🔒</span>使用建议</a>
         </aside>
       </div>
 
       <footer class="footer">
-        原始资料参考 Maccy 官方 README；本文按日常使用流程重新整理。
+        📚 原始资料参考 Maccy 官方 README；本文按日常使用流程重新整理。
       </footer>
     </div>
 

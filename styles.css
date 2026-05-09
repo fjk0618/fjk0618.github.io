@@ -242,7 +242,9 @@ main {
 }
 
 .toc a {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35em;
   padding: 6px 0;
   color: var(--subtext);
   font-size: 0.92rem;
@@ -279,6 +281,12 @@ article li + li {
   margin-top: 8px;
 }
 
+.emoji {
+  display: inline-block;
+  margin-right: 0.35em;
+  transform: translateY(0.03em);
+}
+
 .meta {
   display: flex;
   flex-wrap: wrap;
@@ -295,6 +303,25 @@ article li + li {
   border: 1px solid rgba(205, 214, 244, 0.14);
   border-radius: 999px;
   background: rgba(49, 50, 68, 0.46);
+}
+
+.emoji-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 780px;
+}
+
+.emoji-strip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 2px 12px;
+  border: 1px solid rgba(250, 179, 135, 0.18);
+  border-radius: 999px;
+  background: rgba(17, 17, 27, 0.44);
+  color: var(--text);
+  font-size: 0.94rem;
 }
 
 .note {
@@ -384,7 +411,9 @@ pre code {
 }
 
 .info-box strong {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
   margin-bottom: 4px;
   color: var(--peach);
 }
@@ -407,6 +436,25 @@ pre code {
   border-radius: 999px;
   background: rgba(17, 17, 27, 0.38);
   color: var(--text);
+}
+
+.emoji-list {
+  display: grid;
+  gap: 10px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.emoji-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35em;
+}
+
+.emoji-list .emoji,
+.toc .emoji,
+.info-box .emoji {
+  margin-right: 0;
 }
 
 .footer {
