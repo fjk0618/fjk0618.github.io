@@ -360,6 +360,38 @@ h1.post_title {
 	text-align: center;
 }
 
+.p-header .post-cover--fallback {
+	background-position: center;
+}
+
+.p-header .post-cover--clipboard {
+	background-image: radial-gradient(circle at 24% 28%, rgba(255, 255, 255, 0.36), transparent 26%), linear-gradient(135deg, #174c4d 0%, #28a365 58%, #f0b43f 100%);
+}
+
+.p-header .post-cover--terminal {
+	background-image: radial-gradient(circle at 18% 24%, rgba(166, 227, 161, 0.28), transparent 22%), linear-gradient(135deg, #151922 0%, #30445d 52%, #74ccb8 100%);
+}
+
+#NextPrevPosts .preview .post-nav-media {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 0;
+	text-align: center;
+	line-height: 1.15;
+}
+
+#NextPrevPosts .preview .post-nav-media--clipboard {
+	background-image: linear-gradient(135deg, #1b6b67 0%, #2fbf71 55%, #f4b942 100%);
+}
+
+#NextPrevPosts .preview .post-nav-media--terminal {
+	background-image: linear-gradient(135deg, #151922 0%, #32465f 52%, #77d9c0 100%);
+}
+
 #NextPrevPosts .preview .preview-content span {
 	text-transform: none;
 }
